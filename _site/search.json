@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "posts/1.Probabilities/Probability Theory.html",
+    "href": "posts/1.Probabilities/Probability Theory.html",
+    "title": "Introduction to Probability Theory",
+    "section": "",
+    "text": "Probability theory and random variables are fundamental concepts in machine learning, providing the mathematical framework for dealing with uncertainty and variability in data. In this blog post, we will explore these concepts and see how they are applied in the field of machine learning."
+  },
+  {
+    "objectID": "posts/1.Probabilities/Probability Theory.html#introduction",
+    "href": "posts/1.Probabilities/Probability Theory.html#introduction",
+    "title": "Introduction to Probability Theory",
+    "section": "",
+    "text": "Probability theory and random variables are fundamental concepts in machine learning, providing the mathematical framework for dealing with uncertainty and variability in data. In this blog post, we will explore these concepts and see how they are applied in the field of machine learning."
+  },
+  {
+    "objectID": "posts/1.Probabilities/Probability Theory.html#probability-theory",
+    "href": "posts/1.Probabilities/Probability Theory.html#probability-theory",
+    "title": "Introduction to Probability Theory",
+    "section": "Probability Theory",
+    "text": "Probability Theory\nProbability theory is a branch of mathematics that deals with the likelihood or chance of different outcomes. It is used in machine learning to model and make predictions about uncertain events. Some of the key concepts in probability theory include:\n\nProbability Distribution: A probability distribution describes how the values of a random variable are distributed. It can be discrete or continuous, depending on the type of variable.\nExpected Value: The expected value is the mean or average value of a random variable, calculated by taking the weighted average of all possible values.\nVariance and Standard Deviation: These measures describe the spread or dispersion of a random variable’s values."
+  },
+  {
+    "objectID": "posts/1.Probabilities/Probability Theory.html#random-variables",
+    "href": "posts/1.Probabilities/Probability Theory.html#random-variables",
+    "title": "Introduction to Probability Theory",
+    "section": "Random Variables",
+    "text": "Random Variables\nA random variable is a variable that takes on different values based on the outcome of a random process. In machine learning, random variables are used to represent the features and target variable in a dataset. They can be classified into two types:\n\nDiscrete Random Variables: These variables take on a finite number of values. For example, the outcome of a coin toss can be represented as a discrete random variable with two possible values: heads or tails.\nContinuous Random Variables: These variables can take on an infinite number of values within a given range. For example, the height of a person can be represented as a continuous random variable."
+  },
+  {
+    "objectID": "posts/1.Probabilities/Probability Theory.html#application-in-machine-learning",
+    "href": "posts/1.Probabilities/Probability Theory.html#application-in-machine-learning",
+    "title": "Introduction to Probability Theory",
+    "section": "Application in Machine Learning",
+    "text": "Application in Machine Learning\nIn machine learning, probability theory and random variables are used to model and understand the uncertainty in data. Here are some ways they are applied:\n\nRandom Forests: Random forests are a type of ensemble learning method that uses a collection of decision trees to make predictions. The “random” in random forests refers to the random selection of features and data points used to build each tree."
+  },
+  {
+    "objectID": "posts/1.Probabilities/Probability Theory.html#code-examples",
+    "href": "posts/1.Probabilities/Probability Theory.html#code-examples",
+    "title": "Introduction to Probability Theory",
+    "section": "Code Examples",
+    "text": "Code Examples\nIn the following Python examples, we will illustrate the key concepts of probability theory and random variables discussed above. Here’s what we will be doing:\n\nProbability Distribution: We’ll create a normal distribution, which is a type of probability distribution, and visualize it using a graph. This will demonstrate how data can be distributed around a mean value.\n\nExpected Value and Variance: From the normal distribution, we’ll calculate the expected value (mean) and variance, which give us a sense of the central tendency and spread of the data.\n\nDiscrete Random Variable: We’ll simulate a coin toss, which is an example of a discrete random variable, to show how we can represent events with two or more distinct outcomes.\nContinuous Random Variable: Finally, we’ll simulate the heights of people, which is an example of a continuous random variable, to demonstrate how we can represent events with an infinite range of possible outcomes.\n\nThrough these examples, we’ll gain a practical understanding of these concepts and see how they can be applied to real-world data.\n\n# Import necessary libraries\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.stats import norm\n\n\n# Probability Distribution: Example with a Normal Distribution\nmu, sigma = 0, 0.1  # mean and standard deviation\ns = np.random.normal(mu, sigma, 1000)\n\n# Plot the histogram of the sample\ncount, bins, ignored = plt.hist(s, 30, density=True)\nplt.plot(bins, 1 / (sigma * np.sqrt(2 * np.pi)) *\n         np.exp(-(bins - mu) ** 2 / (2 * sigma ** 2)),\n         linewidth=2, color='r')\nplt.title('Probability Distribution: Normal Distribution')\nplt.show()\n\n# Expected Value and Variance\nexpected_value = np.mean(s)\nvariance = np.var(s)\nprint(f'Expected Value: {expected_value}')\nprint(f'Variance: {variance}')\n\n\n\n\nExpected Value: -0.0011666313731559523\nVariance: 0.009747766798048644\n\n\nIn this Python code, we generated random numbers to demonstrate what we learned earlier. First, we showed what a normal distribution looks like by drawing a bell-shaped curve, and then we calculated the average (mean) and spread (variance) of the numbers.\n\n# Discrete Random Variable: Example with a Coin Toss\ncoin_toss = np.random.choice(['Heads', 'Tails'], 1000)\nunique, counts = np.unique(coin_toss, return_counts=True)\ncoin_toss_prob = dict(zip(unique, counts / len(coin_toss)))\nprint(f'Coin Toss Probabilities: {coin_toss_prob}')\n\nCoin Toss Probabilities: {'Heads': 0.479, 'Tails': 0.521}\n\n\nHere, we simulated flipping a coin a thousand times and showed the likelihood of getting heads or tails. Which turns out to be ~0.5 for both cases.\n\n# Continuous Random Variable: Example with Heights of People\nheights = np.random.normal(170, 10, 1000)  # mean height = 170 cm, std deviation = 10 cm\nmean_height = np.mean(heights)\nvar_height = np.var(heights)\nprint(f'Mean Height: {mean_height} cm')\nprint(f'Variance of Heights: {var_height} cm^2')\n\nMean Height: 169.9326452743008 cm\nVariance of Heights: 104.72824250963349 cm^2\n\n\nHere, we simulated the heights of a thousand people, calculated the average height, and how much the heights vary from each other. This is just like how we use these concepts in machine learning to understand and predict different events or outcomes based on data."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Hello! I am Ahmed Aredah, a PhD student specializing in Civil Engineering with a focus on transportation. Concurrently, I’m also pursuing an MSc in Computer Science. My academic journey has equipped me with a unique blend of knowledge, bridging the gap between the worlds of transportation and computer science.\nI take pride in being the developer behind NeTrainSim, an open-source network train simulator. NeTrainSim is a collaborative effort between Virginia Tech (VT), North Carolina State University (NC), and Deutsch Bahn (DB). The project was supervised and steered by the esteemed Prof. Hesham Rakha. This initiative is a testament to my passion for contributing to the community and my commitment to advancing the field of transportation through technological innovations and collaborative research.\nWithin this blog, I will be showing the basics of machine learning techniques without going into too much of techniqal complexities. In addition, I will shed the lights on a quick overview of each technique with a little bit of some code."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Machine_learning_basics",
+    "section": "",
+    "text": "Introduction to Probability Theory\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\nNo matching items"
+  }
+]

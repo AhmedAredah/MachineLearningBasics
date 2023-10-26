@@ -1,0 +1,23 @@
+---
+title: "About"
+image: Ahmed.jpg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/AhmedAredah
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/AhmedAredah
+    - icon: github
+      text: Github
+      href: https://github.com/AhmedAredah
+
+---
+
+Hello! I am **Ahmed Aredah**, a PhD student specializing in Civil Engineering with a focus on transportation. Concurrently, I'm also pursuing an MSc in Computer Science. My academic journey has equipped me with a unique blend of knowledge, bridging the gap between the worlds of transportation and computer science.
+
+I take pride in being the developer behind [NeTrainSim](https://github.com/VTTI-CSM/NeTrainSim), an open-source network train simulator. NeTrainSim is a collaborative effort between Virginia Tech (VT), North Carolina State University (NC), and Deutsch Bahn (DB). The project was supervised and steered by the esteemed Prof. Hesham Rakha. This initiative is a testament to my passion for contributing to the community and my commitment to advancing the field of transportation through technological innovations and collaborative research.
+
+Within this blog, I will be showing the basics of machine learning techniques without going into too much of techniqal complexities. In addition, I will shed the lights on a quick overview of each technique with a little bit of some code.
