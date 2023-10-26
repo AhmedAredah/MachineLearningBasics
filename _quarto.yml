@@ -8,8 +8,8 @@ website:
   open-graph: true
   reader-mode: true
   page-navigation: true
-  repo-branch: master
-  repo-url: https://github.com
+  repo-branch: main
+  repo-url: https://github.com/AhmedAredah/MachineLearningBasics
 
   navbar:
     search: true
