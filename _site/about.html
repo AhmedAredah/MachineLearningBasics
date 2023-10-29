@@ -60,6 +60,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Machine learning basics - About">
@@ -171,6 +187,23 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">2.Regression</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./posts/2.Regression/NumericalDataPrediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multiple Linear Regression: Application on FARS Dataset</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
     </ul>
@@ -193,6 +226,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Hello! I am <strong>Ahmed Aredah</strong>, a PhD student specializing in Civil Engineering with a focus on transportation. Concurrently, I’m also pursuing an MSc in Computer Science. My academic journey has equipped me with a unique blend of knowledge, bridging the gap between the worlds of transportation and computer science.</p>
 <p>I take pride in being the developer behind <a href="https://github.com/VTTI-CSM/NeTrainSim">NeTrainSim</a>, an open-source network train simulator. NeTrainSim is a collaborative effort between Virginia Tech (VT), North Carolina State University (NC), and Deutsch Bahn (DB). The project was supervised and steered by the esteemed Prof.&nbsp;Hesham Rakha. This initiative is a testament to my passion for contributing to the community and my commitment to advancing the field of transportation through technological innovations and collaborative research.</p>
 <p>Within this blog, I will be showing the basics of machine learning techniques without going into too much of techniqal complexities. In addition, I will shed the lights on a quick overview of each technique with a little bit of some code.</p>
+<p><span class="math display">
+\text{selling\_price} = 14.4086 - 0.4352 \times \text{km\_driven} + 0.0753 \times \text{mileage} + 0.0013 \times \text{engine} + 0.0002 \times \text{fuel\_Diesel} - 0.0925 \times \text{fuel\_LPG} - 0.0118 \times \text{fuel\_Petrol} - 0.0650 \times \text{seller\_type\_Individual} + 0.0432 \times \text{seller\_type\_Trustmark Dealer} - 0.0168 \times \text{transmission\_Manual} - 0.0735 \times \text{owner\_Fourth &amp; Above Owner} - 0.0112 \times \text{owner\_Second Owner} - 0.7467 \times \text{owner\_Test Drive Car} - 0.0485 \times \text{owner\_Third Owner}
+</span></p>
 
 
 </main> 

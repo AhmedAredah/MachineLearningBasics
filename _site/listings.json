@@ -2,7 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/1.Probabilities/Probability Theory.html"
+      "/posts/1.Probabilities/Probability Theory.html",
+      "/posts/2.Regression/NumericalDataPrediction.html"
     ]
   }
 ]
