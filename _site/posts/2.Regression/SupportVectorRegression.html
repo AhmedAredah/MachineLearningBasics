@@ -292,11 +292,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The SVR function can be mathematically represented as follows: <span class="math display">\begin{equation}
 f(x) = \langle w, x \rangle + b
 \end{equation}</span></p>
-<p>where: - (w) is the weight vector. - (x) is the input vector. - (b) is the bias. - (w, x ) represents the dot product of (w) and (x).</p>
+<p>where:</p>
+<ul>
+<li><p>(w) is the weight vector.</p></li>
+<li><p>(x) is the input vector.</p></li>
+<li><p>(b) is the bias.</p></li>
+<li><p>(w, x ) represents the dot product of (w) and (x).</p></li>
+</ul>
 <p>The goal of SVR is to find the optimal values of (w) and (b) that minimize the following cost function: <span class="math display">\begin{equation}
 \frac{1}{2} \|w\|^2 + C \sum_{i=1}^{m} \left(\max(0, |y_i - \langle w, x_i \rangle - b| - \epsilon)\right)
 \end{equation}</span></p>
-<p>where: - (C) is the regularization parameter, which controls the trade-off between achieving a low training error and a low testing error. - () is the insensitivity tube within which no penalty is associated in the training loss function with points predicted within a distance () from the actual value.</p>
+<p>where:</p>
+<ul>
+<li><p>(C) is the regularization parameter, which controls the trade-off between achieving a low training error and a low testing error.</p></li>
+<li><p>() is the insensitivity tube within which no penalty is associated in the training loss function with points predicted within a distance () from the actual value.</p></li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png" class="img-fluid figure-img"></p>
@@ -308,14 +318,21 @@ f(x) = \langle w, x \rangle + b
 <p>In cases where the relationship between the dependent and independent variables is non-linear, SVR can be extended to handle non-linear relationships using the kernel trick. The kernel trick involves transforming the input space into a higher-dimensional space where a linear relationship between the dependent and independent variables can be found. Mathematically, this can be represented as follows: <span class="math display">\begin{equation}
 f(x) = \langle w, \phi(x) \rangle + b
 \end{equation}</span></p>
-<p>where: - ((x)) is the transformed input vector.</p>
+<p>where:</p>
+<ul>
+<li>((x)) is the transformed input vector.</li>
+</ul>
 <p>The cost function becomes: <span class="math display">\begin{equation}
 \frac{1}{2} \|w\|^2 + C \sum_{i=1}^{m} \left(\max(0, |y_i - \langle w, \phi(x_i) \rangle - b| - \epsilon)\right)
 \end{equation}</span></p>
 <p>A common kernel used in SVR is the Gaussian Radial Basis Function (RBF) kernel, which is defined as follows: <span class="math display">\begin{equation}
 K(x_i, x_j) = \exp\left(-\frac{\|x_i - x_j\|^2}{2\sigma^2}\right)
 \end{equation}</span></p>
-<p>where: - (K(x_i, x_j)) is the kernel function that computes the dot product ((x_i), (x_j) ). - () is the bandwidth parameter of the RBF kernel.</p>
+<p>where:</p>
+<ul>
+<li><p>(K(x_i, x_j)) is the kernel function that computes the dot product ((x_i), (x_j) ).</p></li>
+<li><p>() is the bandwidth parameter of the RBF kernel.</p></li>
+</ul>
 </section>
 </section>
 <section id="application-on-cars-selling-dataset" class="level2">
