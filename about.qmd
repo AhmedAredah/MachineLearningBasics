@@ -21,6 +21,3 @@ I take pride in being the developer behind [NeTrainSim](https://github.com/VTTI-
 
 Within this blog, I will be showing the basics of machine learning techniques without going into too much of techniqal complexities. In addition, I will shed the lights on a quick overview of each technique with a little bit of some code.
 
-$$
-\text{selling\_price} = 14.4086 - 0.4352 \times \text{km\_driven} + 0.0753 \times \text{mileage} + 0.0013 \times \text{engine} + 0.0002 \times \text{fuel\_Diesel} - 0.0925 \times \text{fuel\_LPG} - 0.0118 \times \text{fuel\_Petrol} - 0.0650 \times \text{seller\_type\_Individual} + 0.0432 \times \text{seller\_type\_Trustmark Dealer} - 0.0168 \times \text{transmission\_Manual} - 0.0735 \times \text{owner\_Fourth & Above Owner} - 0.0112 \times \text{owner\_Second Owner} - 0.7467 \times \text{owner\_Test Drive Car} - 0.0485 \times \text{owner\_Third Owner}
-$$

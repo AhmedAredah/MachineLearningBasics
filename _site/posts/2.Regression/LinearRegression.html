@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../posts/2.Regression/SupportVectorRegression.html" rel="next">
 <link href="../../posts/1.Probabilities/Probability Theory.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -118,11 +119,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Machine learning basics - Multiple Linear Regression: Application on FARS Dataset">
 <meta property="og:description" content="">
-<meta property="og:image" content="NumericalDataPrediction_files/figure-html/cell-8-output-1.png">
+<meta property="og:image" content="LinearRegression_files/figure-html/3ad4ea9f-948a-4352-81ef-1b2bb9105549-1-453696d8-bd6b-43a2-b7b2-135029ad0554.png">
 <meta property="og:site-name" content="Machine learning basics">
 <meta name="twitter:title" content="Machine learning basics - Multiple Linear Regression: Application on FARS Dataset">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="NumericalDataPrediction_files/figure-html/cell-8-output-1.png">
+<meta name="twitter:image" content="LinearRegression_files/figure-html/3ad4ea9f-948a-4352-81ef-1b2bb9105549-1-453696d8-bd6b-43a2-b7b2-135029ad0554.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -173,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/2.Regression/NumericalDataPrediction.html">2.Regression</a></li><li class="breadcrumb-item"><a href="../../posts/2.Regression/NumericalDataPrediction.html">Multiple Linear Regression: Application on FARS Dataset</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">2.Regression</a></li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">Multiple Linear Regression: Application on FARS Dataset</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -252,8 +253,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/2.Regression/NumericalDataPrediction.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../posts/2.Regression/LinearRegression.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Multiple Linear Regression: Application on FARS Dataset</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/2.Regression/SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Support Vector Regression</span></a>
   </div>
 </li>
       </ul>
@@ -271,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link active" data-scroll-target="#mathematical-formulation">Mathematical Formulation</a></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
+  <li><a href="#application-on-cars-selling-dataset" id="toc-application-on-cars-selling-dataset" class="nav-link" data-scroll-target="#application-on-cars-selling-dataset">Application on Cars selling Dataset</a></li>
   </ul>
 </nav>
     </div>
@@ -324,11 +331,12 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <li><p><strong>Projection onto Column Space:</strong> The term <span class="math inline">\mathbf{X}^T \mathbf{y}</span> can be interpreted as projecting the response vector <span class="math inline">\mathbf{y}</span> onto the column space of <span class="math inline">\mathbf{X}</span>.</p></li>
 <li><p><strong>Minimization of Residuals:</strong> The expression <span class="math inline">(\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T</span> originates from differentiating the sum of squared residuals with respect to <span class="math inline">\boldsymbol{\beta}</span> and setting it to zero.</p></li>
 </ul>
-<p>We’ll be applying this concept to the FARS dataset. Managed by the U.S. National Highway Traffic Safety Administration (NHTSA), the Fatality Analysis Reporting System (FARS) provides an extensive record of fatal motor vehicle crashes in the U.S. and Puerto Rico since 1975.</p>
+<p>Finally, what we are trying to accomplish is to reduce the error between the model and the actual data: <img src="LinearRegression_files/figure-html/3ad4ea9f-948a-4352-81ef-1b2bb9105549-1-453696d8-bd6b-43a2-b7b2-135029ad0554.png" class="img-fluid" alt="image.png"></p>
+<p>We’ll be applying this concept to the cars dataset.</p>
 </section>
 </section>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">Code</h2>
+<section id="application-on-cars-selling-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="application-on-cars-selling-dataset">Application on Cars selling Dataset</h2>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import required libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -928,7 +936,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the matplotlib figure</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">3</span>, ncols<span class="op">=</span><span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">10</span>))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -957,12 +965,12 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="NumericalDataPrediction_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>When applying linear regression to this dataset, it’s crucial to consider these distributions. The insights derived from these plots can help in feature selection, outlier detection, and in understanding the relationships between variables. For instance, the dominance of diesel and petrol cars might mean that other fuel types have less influence on the selling price. Similarly, the large number of manual transmission cars might imply that automatic transmission could be a premium feature, potentially impacting the price.</p>
 <p>from the above distribution we find that selling price, and km_driven are positively skewed and we need to apply a transformation function to make it normally distributed.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>transformed_data <span class="op">=</span> np.log1p(cars[<span class="st">'selling_price'</span>])  <span class="co"># log1p helps in dealing with zero values in the original data</span></span>
@@ -970,11 +978,11 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sns.histplot(transformed_data, ax<span class="op">=</span>axes[<span class="dv">0</span>])<span class="op">;</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sns.histplot(transformed_data_2, ax<span class="op">=</span>axes[<span class="dv">1</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="NumericalDataPrediction_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>We will compare the regression model with and without the transformation</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate VIF for each predictor variable</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cars_numeric <span class="op">=</span> cars.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cars_numeric <span class="op">=</span> cars_numeric.fillna(cars_numeric.mean())</span>
@@ -983,7 +991,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>vif_data[<span class="st">"variable"</span>] <span class="op">=</span> cars_numeric.columns</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>vif_data[<span class="st">"VIF"</span>] <span class="op">=</span> [variance_inflation_factor(cars_numeric.values, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(cars_numeric.shape[<span class="dv">1</span>])]</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>vif_data.head(n<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -1044,15 +1052,15 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 <p>Variance Inflation Factor (VIF) is a measure that helps to identify multicollinearity in regression models. When interpreting the VIF, a general rule of thumb is that a VIF above 5-10 suggests a problematic amount of collinearity. Given the high VIF values for ‘Year’, ‘mileage’, ‘engine’, ‘max_power’, and ‘Seats’, one should consider further analysis or remedial measures to address potential multicollinearity before proceeding with building a regression model.</p>
 <p>From this, I will drop the highest 2 VIF column value and redo the analysis again.</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cars_numeric <span class="op">=</span> cars_numeric.drop([<span class="st">"year"</span>, <span class="st">"seats"</span>, <span class="st">"max_power"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vif_data <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>vif_data[<span class="st">"variable"</span>] <span class="op">=</span> cars_numeric.columns</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>vif_data[<span class="st">"VIF"</span>] <span class="op">=</span> [variance_inflation_factor(cars_numeric.values, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(cars_numeric.shape[<span class="dv">1</span>])]</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>vif_data.head(n<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 
 
@@ -1097,19 +1105,19 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 </div>
 <p>The resultant VIF indicates almost no multicolinearity in the data.</p>
-<p>For the categorical data, the regression model does not understand strings (text) so we need to find a way to transfer this text in numbers. one way is to encode them which converts the categories into a series of 1,2,3 coresponding to the categorical order. OneHoteEncder does this job for us.</p>
-<div class="cell" data-execution_count="13">
+<p>Before we proceed, let’s drop the columns that we decided to drop before in the VIF analysis.</p>
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> cars.drop([<span class="st">"year"</span>, <span class="st">"seats"</span>, <span class="st">"max_power"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="14">
+<p>For the categorical data, the regression model does not understand strings (text) so we need to find a way to transfer this text in numbers. one way is to encode them which converts the categories into a series of 1,2,3 coresponding to the categorical order. OneHoteEncder does this job for us.</p>
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preprocessing: One-hot encode categorical variables</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="op">=</span> [<span class="st">'fuel'</span>, <span class="st">'seller_type'</span>, <span class="st">'transmission'</span>, <span class="st">'owner'</span>]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>one_hot <span class="op">=</span> OneHotEncoder(drop<span class="op">=</span><span class="st">'first'</span>, sparse<span class="op">=</span><span class="va">False</span>)  <span class="co"># drop='first' to avoid multicollinearity</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>encoded_features <span class="op">=</span> one_hot.fit_transform(cars[categorical_columns])</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>encoded_df <span class="op">=</span> pd.DataFrame(encoded_features, columns<span class="op">=</span>one_hot.get_feature_names_out(categorical_columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Before we proceed, let’s drop the columns that we decided to drop before in the VIF analysis.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate encoded features with the original dataframe</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> pd.concat([cars, encoded_df], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1117,7 +1125,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> cars.drop(columns<span class="op">=</span>categorical_columns <span class="op">+</span> [<span class="st">'name'</span>, <span class="st">'torque'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again, let’s make sure we dont have any missing values before we continue by filling with the mean value.</p>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define predictors (X) and target variable (y)</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cars.drop(<span class="st">'selling_price'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cars[<span class="st">'selling_price'</span>]</span>
@@ -1127,7 +1135,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <p>We will do the regression model here.</p>
 <section id="first-regression-model-without-transformation" class="level4">
 <h4 class="anchored" data-anchor-id="first-regression-model-without-transformation">First regression model without transformation</h4>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into train and test sets</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1157,7 +1165,7 @@ Coefficients: [-4.21035185e+00  3.33345338e+04  9.85201248e+02 -1.36989350e+05
  -3.43569635e+04]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the first feature for demonstration</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>feature_index <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>feature_name <span class="op">=</span> X.columns[feature_index]</span>
@@ -1176,52 +1184,69 @@ Coefficients: [-4.21035185e+00  3.33345338e+04  9.85201248e+02 -1.36989350e+05
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="NumericalDataPrediction_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
 </div>
 </div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(y_pred, residuals)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Residuals vs. Predicted Values'</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted Values'</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="LinearRegression_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The error plot indicates the error distribution is not random and there is a trend in the error that the model could not capture. Let’s then try the second regression model where we incorporate the transformation.</p>
 <hr>
 </section>
 <section id="second-regression-model-with-transformation" class="level4">
 <h4 class="anchored" data-anchor-id="second-regression-model-with-transformation">Second regression model with transformation</h4>
 <p>now, lets transform the selling price and km_driven columns using log() function and create a new regression model</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'selling_price'</span>] <span class="op">=</span> np.log1p(cars[<span class="st">'selling_price'</span>])</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'km_driven'</span>] <span class="op">=</span> np.log1p(cars[<span class="st">'km_driven'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'selling_price'</span>] <span class="op">=</span> np.log1p(cars[<span class="st">'selling_price'</span>])</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'km_driven'</span>] <span class="op">=</span> np.log1p(cars[<span class="st">'km_driven'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define predictors (X) and target variable (y)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cars.drop(<span class="st">'selling_price'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cars[<span class="st">'selling_price'</span>]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train.dropna()</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train[X_train.index]  <span class="co"># Keep corresponding y values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define predictors (X) and target variable (y)</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cars.drop(<span class="st">'selling_price'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cars[<span class="st">'selling_price'</span>]</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train.dropna()</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train[X_train.index]  <span class="co"># Keep corresponding y values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into train and test sets</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaN values from X_train</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train.dropna()</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Synchronize y_train with the updated X_train</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train.loc[X_train.index]</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X_test.dropna()</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> y_test.loc[X_test.index]</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and train the Linear Regression model</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>lin_reg.fit(X_train, y_train)</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> lin_reg.predict(X_test)</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model's performance</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R^2 (coefficient of determination): </span><span class="sc">{</span>r2<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> mean_squared_error(y_test, y_pred)</span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean Squared Error: </span><span class="sc">{</span>mse<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Model's coefficients and intercept</span></span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Intercept: </span><span class="sc">{</span>lin_reg<span class="sc">.</span>intercept_<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coefficients: </span><span class="sc">{</span>lin_reg<span class="sc">.</span>coef_<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into train and test sets</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaN values from X_train</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train.dropna()</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Synchronize y_train with the updated X_train</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train.loc[X_train.index]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X_test.dropna()</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> y_test.loc[X_test.index]</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and train the Linear Regression model</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>lin_reg.fit(X_train, y_train)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> lin_reg.predict(X_test)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model's performance</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R^2 (coefficient of determination): </span><span class="sc">{</span>r2<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>mse <span class="op">=</span> mean_squared_error(y_test, y_pred)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean Squared Error: </span><span class="sc">{</span>mse<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Model's coefficients and intercept</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Intercept: </span><span class="sc">{</span>lin_reg<span class="sc">.</span>intercept_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coefficients: </span><span class="sc">{</span>lin_reg<span class="sc">.</span>coef_<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R^2 (coefficient of determination): 0.60
 Mean Squared Error: 0.27
@@ -1232,28 +1257,45 @@ Coefficients: [-4.35206639e-01  7.52823926e-02  1.32585312e-03  1.64254578e-04
  -4.84720247e-02]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the first feature for demonstration</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>feature_index <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>feature_name <span class="op">=</span> X.columns[feature_index]</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot of actual vs. predicted</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_test, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Actual Values'</span>)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_pred, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>, label<span class="op">=</span><span class="st">'Predicted Values'</span>)</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Regression Fit for Feature: '</span> <span class="op">+</span> feature_name)</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(feature_name)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Selling Price'</span>)</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the first feature for demonstration</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>feature_index <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>feature_name <span class="op">=</span> X.columns[feature_index]</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot of actual vs. predicted</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_test, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Actual Values'</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_pred, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>, label<span class="op">=</span><span class="st">'Predicted Values'</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Regression Fit for Feature: '</span> <span class="op">+</span> feature_name)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(feature_name)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Selling Price'</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="NumericalDataPrediction_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
 </div>
 </div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(y_pred, residuals)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Residuals vs. Predicted Values'</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Predicted Values'</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="LinearRegression_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Here, the error plot indicates the error is random and does not show any trend in the data. Thus the model we have is much better than the previous model.</p>
 <p><strong>by doing the transformation, we gained around 23% in the fit.</strong></p>
 <p>Hence the final equation is:</p>
 <p><span class="math display">\begin{equation}
@@ -1520,6 +1562,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../posts/2.Regression/SupportVectorRegression.html" class="pagination-link">
+        <span class="nav-page-text">Support Vector Regression</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
