@@ -338,7 +338,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </section>
 <section id="application-on-cars-selling-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="application-on-cars-selling-dataset">Application on Cars selling Dataset</h2>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import required libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -368,12 +368,12 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 </div>
 <p>The dataset source is accessible from <a href="https://www.kaggle.com/datasets/nehalbirla/vehicle-dataset-from-cardekho?select=Car+details+v3.csv">here</a></p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the cars dataset</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/AhmedAredah/MachineLearningBasics/main/data/cars.csv"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>cars.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="76">
 <div>
 
 
@@ -472,13 +472,13 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <p>Before fitting a linear regression model, it’s important to check for outliers, as they can have a significant impact on your model. The <code>min</code> and <code>max</code> values in the <code>describe</code> output can help you identify any extreme values that might be outliers. You may also want to plot your data to visually inspect for outliers.</p>
 <p>Additionally, the <code>mean</code> and <code>std</code> values can be used to standardize your variables, which is a common preprocessing step for linear regression. Standardizing your variables can make it easier to interpret the coefficients of your linear regression model, especially when your variables are on different scales.</p>
 <p>In this case, We will just remove rows with missing values since it is easier but this could have a huge impact on the dataset.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows where any cell contains NA or NAN </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> cars.dropna()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># show the top 5 rows</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cars.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="77">
 <div>
 
 
@@ -589,7 +589,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 </div>
 <p>From the above table we need to clean the dataset first and remove strings from columns ‘mileages’, ‘engine’, ‘max_power’, and ‘torque’</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List of columns to process</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>columns_to_process <span class="op">=</span> [<span class="st">'mileage'</span>, <span class="st">'engine'</span>, <span class="st">'max_power'</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -603,7 +603,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert those values to float, set others to NaN if they can't be converted</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    cars[column] <span class="op">=</span> pd.to_numeric(cars[column], errors<span class="op">=</span><span class="st">'coerce'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to extract the numeric part before 'Nm'</span></span>
@@ -614,7 +614,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to the torque column</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'torque'</span>] <span class="op">=</span> cars[<span class="st">'torque'</span>].<span class="bu">apply</span>(extract_torque_value)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>cars.dropna()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="79">
 <div>
 
 
@@ -822,9 +822,9 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 </div>
 <p>Before diving into machine learning, understanding the descriptive statistics of our data is crucial. It provides insights into the distribution, tendencies, and range of our data. This preliminary step ensures that we’re aware of the data’s characteristics, helping in making informed decisions about preprocessing, model selection, and interpretation of results. Such an understanding can aid in identifying anomalies, ensuring data quality, and setting the right expectations from the model’s predictions.</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cars.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="80">
 <div>
 
 
@@ -937,18 +937,18 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="81">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the matplotlib figure</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">3</span>, ncols<span class="op">=</span><span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">10</span>))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the distribution of each variable</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>hist1 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'year'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>hist2 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'selling_price'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>hist3 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'km_driven'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>hist4 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'engine'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">3</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>hist5 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'max_power'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>hist6 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'mileage'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>hist7 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'torque'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>hist1 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'year'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>hist2 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'selling_price'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>hist3 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'km_driven'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>hist4 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'engine'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">3</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>hist5 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'max_power'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>hist6 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'mileage'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>hist7 <span class="op">=</span> sns.histplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'torque'</span>, kde<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the count of each category for categorical variables</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>seats_plot <span class="op">=</span> sns.countplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">'seats'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">3</span>])</span>
@@ -966,12 +966,12 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LinearRegression_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>When applying linear regression to this dataset, it’s crucial to consider these distributions. The insights derived from these plots can help in feature selection, outlier detection, and in understanding the relationships between variables. For instance, the dominance of diesel and petrol cars might mean that other fuel types have less influence on the selling price. Similarly, the large number of manual transmission cars might imply that automatic transmission could be a premium feature, potentially impacting the price.</p>
 <p>from the above distribution we find that selling price, and km_driven are positively skewed and we need to apply a transformation function to make it normally distributed.</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="82">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>transformed_data <span class="op">=</span> np.log1p(cars[<span class="st">'selling_price'</span>])  <span class="co"># log1p helps in dealing with zero values in the original data</span></span>
@@ -979,11 +979,11 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sns.histplot(transformed_data, ax<span class="op">=</span>axes[<span class="dv">0</span>])<span class="op">;</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sns.histplot(transformed_data_2, ax<span class="op">=</span>axes[<span class="dv">1</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LinearRegression_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>We will compare the regression model with and without the transformation</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="83">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate VIF for each predictor variable</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cars_numeric <span class="op">=</span> cars.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cars_numeric <span class="op">=</span> cars_numeric.fillna(cars_numeric.mean())</span>
@@ -992,7 +992,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>vif_data[<span class="st">"variable"</span>] <span class="op">=</span> cars_numeric.columns</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>vif_data[<span class="st">"VIF"</span>] <span class="op">=</span> [variance_inflation_factor(cars_numeric.values, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(cars_numeric.shape[<span class="dv">1</span>])]</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>vif_data.head(n<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="83">
 <div>
 
 
@@ -1053,15 +1053,15 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 <p>Variance Inflation Factor (VIF) is a measure that helps to identify multicollinearity in regression models. When interpreting the VIF, a general rule of thumb is that a VIF above 5-10 suggests a problematic amount of collinearity. Given the high VIF values for ‘Year’, ‘mileage’, ‘engine’, ‘max_power’, and ‘Seats’, one should consider further analysis or remedial measures to address potential multicollinearity before proceeding with building a regression model.</p>
 <p>From this, I will drop the highest 2 VIF column value and redo the analysis again.</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="84">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cars_numeric <span class="op">=</span> cars_numeric.drop([<span class="st">"year"</span>, <span class="st">"seats"</span>, <span class="st">"max_power"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="85">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vif_data <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>vif_data[<span class="st">"variable"</span>] <span class="op">=</span> cars_numeric.columns</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>vif_data[<span class="st">"VIF"</span>] <span class="op">=</span> [variance_inflation_factor(cars_numeric.values, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(cars_numeric.shape[<span class="dv">1</span>])]</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>vif_data.head(n<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="85">
 <div>
 
 
@@ -1107,18 +1107,18 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 </div>
 <p>The resultant VIF indicates almost no multicolinearity in the data.</p>
 <p>Before we proceed, let’s drop the columns that we decided to drop before in the VIF analysis.</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="86">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> cars.drop([<span class="st">"year"</span>, <span class="st">"seats"</span>, <span class="st">"max_power"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For the categorical data, the regression model does not understand strings (text) so we need to find a way to transfer this text in numbers. one way is to encode them which converts the categories into a series of 1,2,3 coresponding to the categorical order. OneHoteEncder does this job for us.</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="87">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preprocessing: One-hot encode categorical variables</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="op">=</span> [<span class="st">'fuel'</span>, <span class="st">'seller_type'</span>, <span class="st">'transmission'</span>, <span class="st">'owner'</span>]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>one_hot <span class="op">=</span> OneHotEncoder(drop<span class="op">=</span><span class="st">'first'</span>, sparse<span class="op">=</span><span class="va">False</span>)  <span class="co"># drop='first' to avoid multicollinearity</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>encoded_features <span class="op">=</span> one_hot.fit_transform(cars[categorical_columns])</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>encoded_df <span class="op">=</span> pd.DataFrame(encoded_features, columns<span class="op">=</span>one_hot.get_feature_names_out(categorical_columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="88">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate encoded features with the original dataframe</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> pd.concat([cars, encoded_df], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1126,7 +1126,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> cars.drop(columns<span class="op">=</span>categorical_columns <span class="op">+</span> [<span class="st">'name'</span>, <span class="st">'torque'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again, let’s make sure we dont have any missing values before we continue by filling with the mean value.</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="89">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define predictors (X) and target variable (y)</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cars.drop(<span class="st">'selling_price'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cars[<span class="st">'selling_price'</span>]</span>
@@ -1136,7 +1136,7 @@ y_i=\beta_0+\beta_1 x_{i 1}+\beta_2 x_{i 2}+\cdots+\beta_n x_{i n}+\epsilon_i
 <p>We will do the regression model here.</p>
 <section id="first-regression-model-without-transformation" class="level4">
 <h4 class="anchored" data-anchor-id="first-regression-model-without-transformation">First regression model without transformation</h4>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="90">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into train and test sets</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1166,7 +1166,7 @@ Coefficients: [-4.21035185e+00  3.33345338e+04  9.85201248e+02 -1.36989350e+05
  -3.43569635e+04]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="91">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the first feature for demonstration</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>feature_index <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>feature_name <span class="op">=</span> X.columns[feature_index]</span>
@@ -1174,7 +1174,7 @@ Coefficients: [-4.21035185e+00  3.33345338e+04  9.85201248e+02 -1.36989350e+05
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot of actual vs. predicted</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_test, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Actual Values'</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_test, color<span class="op">=</span><span class="st">'skyblue'</span>, label<span class="op">=</span><span class="st">'Actual Values'</span>)</span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_pred, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>, label<span class="op">=</span><span class="st">'Predicted Values'</span>)</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
@@ -1185,10 +1185,10 @@ Coefficients: [-4.21035185e+00  3.33345338e+04  9.85201248e+02 -1.36989350e+05
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LinearRegression_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="92">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1201,7 +1201,7 @@ Coefficients: [-4.21035185e+00  3.33345338e+04  9.85201248e+02 -1.36989350e+05
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LinearRegression_files/figure-html/cell-19-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>The error plot indicates the error distribution is not random and there is a trend in the error that the model could not capture. Let’s then try the second regression model where we incorporate the transformation.</p>
@@ -1210,18 +1210,18 @@ Coefficients: [-4.21035185e+00  3.33345338e+04  9.85201248e+02 -1.36989350e+05
 <section id="second-regression-model-with-transformation" class="level4">
 <h4 class="anchored" data-anchor-id="second-regression-model-with-transformation">Second regression model with transformation</h4>
 <p>now, lets transform the selling price and km_driven columns using log() function and create a new regression model</p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="93">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'selling_price'</span>] <span class="op">=</span> np.log1p(cars[<span class="st">'selling_price'</span>])</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">'km_driven'</span>] <span class="op">=</span> np.log1p(cars[<span class="st">'km_driven'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="94">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define predictors (X) and target variable (y)</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cars.drop(<span class="st">'selling_price'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cars[<span class="st">'selling_price'</span>]</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train.dropna()</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train[X_train.index]  <span class="co"># Keep corresponding y values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="95">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into train and test sets</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaN values from X_train</span></span>
@@ -1258,7 +1258,7 @@ Coefficients: [-4.35206639e-01  7.52823926e-02  1.32585312e-03  1.64254578e-04
  -4.84720247e-02]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="96">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the first feature for demonstration</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>feature_index <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>feature_name <span class="op">=</span> X.columns[feature_index]</span>
@@ -1266,7 +1266,7 @@ Coefficients: [-4.35206639e-01  7.52823926e-02  1.32585312e-03  1.64254578e-04
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot of actual vs. predicted</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_test, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Actual Values'</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_test, color<span class="op">=</span><span class="st">'skyblue'</span>, label<span class="op">=</span><span class="st">'Actual Values'</span>)</span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_test[feature_name], y_pred, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'x'</span>, label<span class="op">=</span><span class="st">'Predicted Values'</span>)</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
@@ -1277,10 +1277,10 @@ Coefficients: [-4.35206639e-01  7.52823926e-02  1.32585312e-03  1.64254578e-04
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
 <span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LinearRegression_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="97">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> y_test <span class="op">-</span> y_pred</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1293,7 +1293,7 @@ Coefficients: [-4.35206639e-01  7.52823926e-02  1.32585312e-03  1.64254578e-04
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LinearRegression_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
+<p><img src="LinearRegression_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Here, the error plot indicates the error is random and does not show any trend in the data. Thus the model we have is much better than the previous model.</p>
