@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Machine learning basics - Support Vector Regression</title>
+<title>Machine learning basics - SVR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,11 +113,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Machine learning basics - Support Vector Regression">
+<meta property="og:title" content="Machine learning basics - SVR">
 <meta property="og:description" content="">
 <meta property="og:image" content="SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png">
 <meta property="og:site-name" content="Machine learning basics">
-<meta name="twitter:title" content="Machine learning basics - Support Vector Regression">
+<meta name="twitter:title" content="Machine learning basics - SVR">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">2.Regression</a></li><li class="breadcrumb-item"><a href="../../posts/2.Regression/SupportVectorRegression.html">Support Vector Regression</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">2.Regression</a></li><li class="breadcrumb-item"><a href="../../posts/2.Regression/SupportVectorRegression.html">SVR</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -183,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Support Vector Regression</h1>
+      <h1 class="title">SVR</h1>
                       </div>
   </div>
     
@@ -250,13 +250,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/2.Regression/LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Multiple Linear Regression: Application on FARS Dataset</span></a>
+ <span class="menu-text">MLR</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/2.Regression/SupportVectorRegression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Support Vector Regression</span></a>
+ <span class="menu-text">SVR</span></a>
   </div>
 </li>
       </ul>
@@ -274,7 +274,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link active" data-scroll-target="#mathematical-formulation">Mathematical Formulation</a></li>
-  <li><a href="#application-on-house-prices-dataset" id="toc-application-on-house-prices-dataset" class="nav-link" data-scroll-target="#application-on-house-prices-dataset">Application on House Prices Dataset</a></li>
+  <li><a href="#application-on-cars-selling-dataset" id="toc-application-on-cars-selling-dataset" class="nav-link" data-scroll-target="#application-on-cars-selling-dataset">Application on Cars selling Dataset</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -284,6 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p>Support Vector Regression</p>
 <section id="mathematical-formulation" class="level2">
 <h2 class="anchored" data-anchor-id="mathematical-formulation">Mathematical Formulation</h2>
 <p>Support Vector Regression (SVR) is used to model the relationship between a dependent variable (y) and multiple independent variables (x_1, x_2, , x_n). The objective of SVR is to find a function (f(x)) that has at most () deviation from the actually obtained targets (y_i) for all the input samples (x_i), and at the same time is as flat as possible.</p>
@@ -316,8 +318,8 @@ K(x_i, x_j) = \exp\left(-\frac{\|x_i - x_j\|^2}{2\sigma^2}\right)
 <p>where: - (K(x_i, x_j)) is the kernel function that computes the dot product ((x_i), (x_j) ). - () is the bandwidth parameter of the RBF kernel.</p>
 </section>
 </section>
-<section id="application-on-house-prices-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="application-on-house-prices-dataset">Application on House Prices Dataset</h2>
+<section id="application-on-cars-selling-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="application-on-cars-selling-dataset">Application on Cars selling Dataset</h2>
 <p>For this blog post, we will be applying SVR to predict car selling prices based on various features such as milage, power, etc. The dataset used here will be the same as the one used for the Linear Regression model to compare the resultant model.</p>
 <div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import required libraries</span></span>
@@ -557,6 +559,10 @@ Mean Squared Error: 0.66</code></pre>
 <li><p>Density of Residuals: A dense clustering of residuals around the zero line, especially in the mid-range of predicted values, suggests that the model is making accurate predictions for a large portion of the data.</p></li>
 </ul>
 <p>In summary, the model appears to be doing a reasonably good job for many of the predicted values, as indicated by the dense cluster of residuals around the zero line. However, the curvature observed in the residuals’ pattern hints at potential non-linearities in the data that might be addressed with further feature engineering, model adjustments, or considering a different modeling approach. The presence of significant outliers also indicates areas where the model’s predictions could be improved.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p><strong>1. Performance Metrics:</strong></p>
 <ul>
 <li><p>R^2 (Coefficient of Determination): The Linear Regression model has an R^2 value of 0.60, suggesting that it explains 60% of the variance in the target variable, which is a relatively decent fit. On the other hand, the SVR model has a low R^2 value of 0.02, indicating it only explains 2% of the variance, which is quite poor.</p></li>
@@ -569,7 +575,6 @@ Mean Squared Error: 0.66</code></pre>
 <p>The residuals are more centered around the zero line and are more clustered, suggesting the predictions are generally more accurate and consistent. There’s less of a discernible pattern in the residuals, although a slight curvature suggests there could be minor non-linearities.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -809,7 +814,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../posts/2.Regression/LinearRegression.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Multiple Linear Regression: Application on FARS Dataset</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">MLR</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
