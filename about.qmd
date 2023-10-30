@@ -21,3 +21,61 @@ I take pride in being the developer behind [NeTrainSim](https://github.com/VTTI-
 
 Within this blog, I will be showing the basics of machine learning techniques without going into too much of techniqal complexities. In addition, I will shed the lights on a quick overview of each technique with a little bit of some code.
 
+## Mathematical Formulation
+
+When modeling the relationship between a dependent variable $y$ and multiple independent variables $x_1, x_2, \dots, x_n$, the logistic function can be written as:
+
+$$
+\begin{equation}
+y_i = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_n x_{in})}}
+\end{equation}
+$$ where:
+
+-   $y_i$ is the observed value of the dependent variable for the $i^{th}$ observation.
+
+-   $x_1, x_2, \dots, x_n$ are the values of the independent variables for the $i^{th}$ observation.
+
+-   $\beta_0, \beta_1, \beta_n$ are the regression coefficients, with $\beta_0$ being the y-intercept.
+
+The goal of logistic regression is to find the values of $\beta_0, \beta_1, \dots, \beta_n$ that maximize the likelihood of the observed data. This is often done using a method known as maximum likelihood estimation (MLE).
+
+### Matrix Notation
+
+Given:
+
+-   $\boldsymbol{X}$ is the design matrix of size $m \times (n + 1)$.
+
+-   $\boldsymbol{y}$ is a column vector of size $m \times 1$ containing the dependent variable values.
+
+-   $\boldsymbol{\beta}$ is a column vector of size $(n + 1) \times 1$ containing the regression coefficients.
+
+-   $\boldsymbol{\epsilon}$ is a column vector of size $m \times 1$ representing the errors.
+
+The relationship can be represented as:
+
+$$
+\large{y} = \frac{1}{1 + e^{-(\mathbf{X}\boldsymbol{\beta})}}
+$$
+
+The likelihood of the observed data given the model parameters can be written as:
+
+$$
+L(\boldsymbol{\beta}) = \prod_{i=1}^m p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
+$$
+
+where $p(y_i | \mathbf{x}_i, \boldsymbol{\beta})$ is the probability of observing $y_i$ given the independent variables $\mathbf{x}_i$ and the model parameters $\boldsymbol{\beta}$. The goal of MLE is to find the values of $\boldsymbol{\beta}$ that maximize $L(\boldsymbol{\beta})$.
+
+### Log Likelihood
+
+Since the likelihood $L(\boldsymbol{\beta})$ is a product of many small numbers, it can be more convenient to work with the log likelihood, which is the natural logarithm of the likelihood:
+
+```{=tex}
+\begin{equation}
+\log L(\boldsymbol{\beta}) = \sum_{i=1}^m \log p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
+\end{equation}
+```
+The log likelihood can be maximized using various optimization algorithms, such as gradient ascent or Newton's method.
+
+## Application on the Breast Cancer Wisconsin Dataset
+
+Now that we have an understanding of logistic regression, let's apply these concepts to the Breast Cancer Wisconsin dataset. This dataset contains features computed from a digitized image of a fine needle aspirate (FNA) of a breast mass, and the goal is to classify the mass as benign or malignant. Stay tuned for a deep dive into the analysis and insights we can extract from this dataset!

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Machine learning basics - MLR</title>
+<title>Machine learning basics - 2.1 Multiple Linear Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,11 +117,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Machine learning basics - MLR">
+<meta property="og:title" content="Machine learning basics - 2.1 Multiple Linear Regression">
 <meta property="og:description" content="">
 <meta property="og:image" content="LinearRegression_files/figure-html/3ad4ea9f-948a-4352-81ef-1b2bb9105549-1-453696d8-bd6b-43a2-b7b2-135029ad0554.png">
 <meta property="og:site-name" content="Machine learning basics">
-<meta name="twitter:title" content="Machine learning basics - MLR">
+<meta name="twitter:title" content="Machine learning basics - 2.1 Multiple Linear Regression">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="LinearRegression_files/figure-html/3ad4ea9f-948a-4352-81ef-1b2bb9105549-1-453696d8-bd6b-43a2-b7b2-135029ad0554.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">2.Regression</a></li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">MLR</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">2.Regression</a></li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">2.1 Multiple Linear Regression</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">MLR</h1>
+      <h1 class="title">2.1 Multiple Linear Regression</h1>
                       </div>
   </div>
     
@@ -237,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/1.Probabilities/Probability Theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Probability Theory</span></a>
+ <span class="menu-text">1.1 Introduction to Probability Theory</span></a>
   </div>
 </li>
       </ul>
@@ -254,13 +254,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/2.Regression/LinearRegression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">MLR</span></a>
+ <span class="menu-text">2.1 Multiple Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../posts/2.Regression/SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SVR</span></a>
+ <span class="menu-text">2.2 Support Vector Regression</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">3.Classification</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/3.Classification/LogisticRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.1 Logistic Regression</span></a>
   </div>
 </li>
       </ul>
@@ -288,7 +305,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>Multiple Linear Regression</p>
 <section id="mathematical-formulation" class="level2">
 <h2 class="anchored" data-anchor-id="mathematical-formulation">Mathematical Formulation</h2>
 <p>When modeling the relationship between a dependent variable <span class="math inline">y</span> and multiple independent variables <span class="math inline">x_1, x_2, \dots, x_n</span>, the linear equation can be written as: <span class="math display">\begin{equation}
@@ -1301,20 +1317,20 @@ Coefficients: [-4.35206639e-01  7.52823926e-02  1.32585312e-03  1.64254578e-04
 <p>Hence the final equation is:</p>
 <p><span class="math display">\begin{equation}
 \begin{split}
-\text{selling\_price} = &amp; 14.4086 \\
-&amp; - 0.4352 \times \text{km\_driven} \\
-&amp; + 0.0753 \times \text{mileage} \\
-&amp; + 0.0013 \times \text{engine} \\
-&amp; + 0.0002 \times \text{fuel\_Diesel} \\
-&amp; - 0.0925 \times \text{fuel\_LPG} \\
-&amp; - 0.0118 \times \text{fuel\_Petrol} \\
-&amp; - 0.0650 \times \text{seller\_type\_Individual} \\
-&amp; + 0.0432 \times \text{seller\_type\_Trustmark Dealer} \\
-&amp; - 0.0168 \times \text{transmission\_Manual} \\
-&amp; - 0.0735 \times \text{owner\_Fourth \&amp; Above Owner} \\
-&amp; - 0.0112 \times \text{owner\_Second Owner} \\
-&amp; - 0.7467 \times \text{owner\_Test Drive Car} \\
-&amp; - 0.0485 \times \text{owner\_Third Owner}
+\text{selling\_price} = &amp; e^{14.4086} \\
+&amp; \times e^{-0.4352 \times \log(\text{km\_driven})} \\
+&amp; \times e^{0.0753 \times \text{mileage}} \\
+&amp; \times e^{0.0013 \times \text{engine}} \\
+&amp; \times e^{0.0002 \times \text{fuel\_Diesel}} \\
+&amp; \times e^{-0.0925 \times \text{fuel\_LPG}} \\
+&amp; \times e^{-0.0118 \times \text{fuel\_Petrol}} \\
+&amp; \times e^{-0.0650 \times \text{seller\_type\_Individual}} \\
+&amp; \times e^{0.0432 \times \text{seller\_type\_Trustmark Dealer}} \\
+&amp; \times e^{-0.0168 \times \text{transmission\_Manual}} \\
+&amp; \times e^{-0.0735 \times \text{owner\_Fourth \&amp; Above Owner}} \\
+&amp; \times e^{-0.0112 \times \text{owner\_Second Owner}} \\
+&amp; \times e^{-0.7467 \times \text{owner\_Test Drive Car}} \\
+&amp; \times e^{-0.0485 \times \text{owner\_Third Owner}}
 \end{split}
 \end{equation}</span></p>
 
@@ -1559,12 +1575,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../posts/1.Probabilities/Probability Theory.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction to Probability Theory</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1.1 Introduction to Probability Theory</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../posts/2.Regression/SupportVectorRegression.html" class="pagination-link">
-        <span class="nav-page-text">SVR</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">2.2 Support Vector Regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

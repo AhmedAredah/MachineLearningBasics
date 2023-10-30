@@ -25,6 +25,7 @@ website:
     alignment: "left"
     search: true
     contents: auto
+    width: 500px
 
   page-footer: 
     left: "Copyright 2023, Ahmed Aredah" 

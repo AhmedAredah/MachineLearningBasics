@@ -60,6 +60,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Machine learning basics - About">
@@ -72,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -166,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./posts/1.Probabilities/Probability Theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Probability Theory</span></a>
+ <span class="menu-text">1.1 Introduction to Probability Theory</span></a>
   </div>
 </li>
       </ul>
@@ -183,13 +199,30 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./posts/2.Regression/LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">MLR</span></a>
+ <span class="menu-text">2.1 Multiple Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./posts/2.Regression/SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SVR</span></a>
+ <span class="menu-text">2.2 Support Vector Regression</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">3.Classification</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./posts/3.Classification/LogisticRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.1 Logistic Regression</span></a>
   </div>
 </li>
       </ul>
@@ -201,7 +234,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+  <ul class="collapse">
+  <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link active" data-scroll-target="#mathematical-formulation">Mathematical Formulation</a></li>
+  <li><a href="#application-on-the-breast-cancer-wisconsin-dataset" id="toc-application-on-the-breast-cancer-wisconsin-dataset" class="nav-link" data-scroll-target="#application-on-the-breast-cancer-wisconsin-dataset">Application on the Breast Cancer Wisconsin Dataset</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <div class="quarto-about-jolla">
   <img src="Ahmed.jpg" class="about-image
@@ -213,11 +254,58 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
   </div>
 </header><main class="content" id="quarto-document-content">
+
 <p>Hello! I am <strong>Ahmed Aredah</strong>, a PhD student specializing in Civil Engineering with a focus on transportation. Concurrently, I’m also pursuing an MSc in Computer Science. My academic journey has equipped me with a unique blend of knowledge, bridging the gap between the worlds of transportation and computer science.</p>
 <p>I take pride in being the developer behind <a href="https://github.com/VTTI-CSM/NeTrainSim">NeTrainSim</a>, an open-source network train simulator. NeTrainSim is a collaborative effort between Virginia Tech (VT), North Carolina State University (NC), and Deutsch Bahn (DB). The project was supervised and steered by the esteemed Prof.&nbsp;Hesham Rakha. This initiative is a testament to my passion for contributing to the community and my commitment to advancing the field of transportation through technological innovations and collaborative research.</p>
 <p>Within this blog, I will be showing the basics of machine learning techniques without going into too much of techniqal complexities. In addition, I will shed the lights on a quick overview of each technique with a little bit of some code.</p>
+<section id="mathematical-formulation" class="level2">
+<h2 data-anchor-id="mathematical-formulation">Mathematical Formulation</h2>
+<p>When modeling the relationship between a dependent variable <span class="math inline">y</span> and multiple independent variables <span class="math inline">x_1, x_2, \dots, x_n</span>, the logistic function can be written as:</p>
+<p><span class="math display">
+\begin{equation}
+y_i = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_n x_{in})}}
+\end{equation}
+</span> where:</p>
+<ul>
+<li><p><span class="math inline">y_i</span> is the observed value of the dependent variable for the <span class="math inline">i^{th}</span> observation.</p></li>
+<li><p><span class="math inline">x_1, x_2, \dots, x_n</span> are the values of the independent variables for the <span class="math inline">i^{th}</span> observation.</p></li>
+<li><p><span class="math inline">\beta_0, \beta_1, \beta_n</span> are the regression coefficients, with <span class="math inline">\beta_0</span> being the y-intercept.</p></li>
+</ul>
+<p>The goal of logistic regression is to find the values of <span class="math inline">\beta_0, \beta_1, \dots, \beta_n</span> that maximize the likelihood of the observed data. This is often done using a method known as maximum likelihood estimation (MLE).</p>
+<section id="matrix-notation" class="level3">
+<h3 data-anchor-id="matrix-notation">Matrix Notation</h3>
+<p>Given:</p>
+<ul>
+<li><p><span class="math inline">\boldsymbol{X}</span> is the design matrix of size <span class="math inline">m \times (n + 1)</span>.</p></li>
+<li><p><span class="math inline">\boldsymbol{y}</span> is a column vector of size <span class="math inline">m \times 1</span> containing the dependent variable values.</p></li>
+<li><p><span class="math inline">\boldsymbol{\beta}</span> is a column vector of size <span class="math inline">(n + 1) \times 1</span> containing the regression coefficients.</p></li>
+<li><p><span class="math inline">\boldsymbol{\epsilon}</span> is a column vector of size <span class="math inline">m \times 1</span> representing the errors.</p></li>
+</ul>
+<p>The relationship can be represented as:</p>
+<p><span class="math display">
+\large{y} = \frac{1}{1 + e^{-(\mathbf{X}\boldsymbol{\beta})}}
+</span></p>
+<p>The likelihood of the observed data given the model parameters can be written as:</p>
+<p><span class="math display">
+L(\boldsymbol{\beta}) = \prod_{i=1}^m p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
+</span></p>
+<p>where <span class="math inline">p(y_i | \mathbf{x}_i, \boldsymbol{\beta})</span> is the probability of observing <span class="math inline">y_i</span> given the independent variables <span class="math inline">\mathbf{x}_i</span> and the model parameters <span class="math inline">\boldsymbol{\beta}</span>. The goal of MLE is to find the values of <span class="math inline">\boldsymbol{\beta}</span> that maximize <span class="math inline">L(\boldsymbol{\beta})</span>.</p>
+</section>
+<section id="log-likelihood" class="level3">
+<h3 data-anchor-id="log-likelihood">Log Likelihood</h3>
+<p>Since the likelihood <span class="math inline">L(\boldsymbol{\beta})</span> is a product of many small numbers, it can be more convenient to work with the log likelihood, which is the natural logarithm of the likelihood:</p>
+<span class="math display">\begin{equation}
+\log L(\boldsymbol{\beta}) = \sum_{i=1}^m \log p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
+\end{equation}</span>
+<p>The log likelihood can be maximized using various optimization algorithms, such as gradient ascent or Newton’s method.</p>
+</section>
+</section>
+<section id="application-on-the-breast-cancer-wisconsin-dataset" class="level2">
+<h2 data-anchor-id="application-on-the-breast-cancer-wisconsin-dataset">Application on the Breast Cancer Wisconsin Dataset</h2>
+<p>Now that we have an understanding of logistic regression, let’s apply these concepts to the Breast Cancer Wisconsin dataset. This dataset contains features computed from a digitized image of a fine needle aspirate (FNA) of a breast mass, and the goal is to classify the mass as benign or malignant. Stay tuned for a deep dive into the analysis and insights we can extract from this dataset!</p>
 
 
+</section>
 </main> 
   <hr class="about-sep">
    <div class="about-links">
@@ -467,7 +555,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./posts/1.Probabilities/Probability Theory.html" class="pagination-link">
-        <span class="nav-page-text">Introduction to Probability Theory</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">1.1 Introduction to Probability Theory</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
