@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Machine learning basics - 3.1 Logistic Regression</title>
+<title>Machine learning basics - 3.2 k-Nearest Neighbour (k-NN)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/3.Classification/KNN.html" rel="prev">
+<link href="../../posts/3.Classification/LogisticRegression.html" rel="next">
+<link href="../../posts/2.Regression/SupportVectorRegression.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -94,9 +95,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -116,13 +114,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Machine learning basics - 3.1 Logistic Regression">
+<meta property="og:title" content="Machine learning basics - 3.2 k-Nearest Neighbour (k-NN)">
 <meta property="og:description" content="">
-<meta property="og:image" content="LogisticRegression_files/figure-html/cell-6-output-1.png">
+<meta property="og:image" content="KNN_files/figure-html/cell-6-output-1.png">
 <meta property="og:site-name" content="Machine learning basics">
-<meta name="twitter:title" content="Machine learning basics - 3.1 Logistic Regression">
+<meta name="twitter:title" content="Machine learning basics - 3.2 k-Nearest Neighbour (k-NN)">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="LogisticRegression_files/figure-html/cell-6-output-1.png">
+<meta name="twitter:image" content="KNN_files/figure-html/cell-6-output-1.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -173,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/3.Classification/KNN.html">3.Classification</a></li><li class="breadcrumb-item"><a href="../../posts/3.Classification/LogisticRegression.html">3.1 Logistic Regression</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/3.Classification/KNN.html">3.Classification</a></li><li class="breadcrumb-item"><a href="../../posts/3.Classification/KNN.html">3.2 k-Nearest Neighbour (k-NN)</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -186,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">3.1 Logistic Regression</h1>
+      <h1 class="title">3.2 k-Nearest Neighbour (k-NN)</h1>
                       </div>
   </div>
     
@@ -275,13 +273,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/3.Classification/KNN.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/3.Classification/KNN.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">3.2 k-Nearest Neighbour (k-NN)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/3.Classification/LogisticRegression.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../posts/3.Classification/LogisticRegression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3.1 Logistic Regression</span></a>
   </div>
 </li>
@@ -299,7 +297,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#mathematical-formulation" id="toc-mathematical-formulation" class="nav-link active" data-scroll-target="#mathematical-formulation">Mathematical Formulation</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#mathematical-description" id="toc-mathematical-description" class="nav-link" data-scroll-target="#mathematical-description">Mathematical Description</a></li>
   <li><a href="#application-on-the-breast-cancer-wisconsin-dataset" id="toc-application-on-the-breast-cancer-wisconsin-dataset" class="nav-link" data-scroll-target="#application-on-the-breast-cancer-wisconsin-dataset">Application on the Breast Cancer Wisconsin Dataset</a></li>
   </ul>
 </nav>
@@ -310,51 +309,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="mathematical-formulation" class="level2">
-<h2 class="anchored" data-anchor-id="mathematical-formulation">Mathematical Formulation</h2>
-<p>When modeling the relationship between a dependent variable <span class="math inline">y</span> and multiple independent variables <span class="math inline">x_1, x_2, \dots, x_n</span>, the logistic function can be written as:</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The k-Nearest Neighbour (k-NN) algorithm is a simple, intuitive method used for classification and regression tasks. Unlike model-based algorithms, it doesn’t explicitly learn a model. Instead, it memorizes the training dataset and makes predictions by finding the ‘k’ training examples closest to a given input.</p>
+</section>
+<section id="mathematical-description" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-description">Mathematical Description</h2>
+<p>Given a new observation <span class="math inline">\mathbf{x}_0</span>, the k-NN algorithm identifies ‘k’ points from the training dataset that are closest to <span class="math inline">\mathbf{x}_0</span>. For classification, the mode (most frequent class) among these k points is taken as the predicted class for <span class="math inline">\mathbf{x}_0</span>. For regression, the average (or median) output value of these k points is used as the prediction.</p>
+<p>The distance between two points can be computed using various metrics, with the Euclidean distance being the most common:</p>
 <p><span class="math display">\begin{equation}
-y_i = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_n x_{in})}}
+d(\mathbf{x}_i, \mathbf{x}_j) = \sqrt{\sum_{l=1}^{n} (x_{il} - x_{jl})^2}
 \end{equation}</span></p>
 <p>where:</p>
 <ul>
-<li><p><span class="math inline">y_i</span> is the observed value of the dependent variable for the <span class="math inline">i^{th}</span> observation.</p></li>
-<li><p><span class="math inline">x_1, x_2, \dots, x_n</span> are the values of the independent variables for the <span class="math inline">i^{th}</span> observation.</p></li>
-<li><p><span class="math inline">\beta_0, \beta_1, \beta_n</span> are the regression coefficients, with <span class="math inline">\beta_0</span> being the y-intercept.</p></li>
+<li><span class="math inline">\mathbf{x}_i</span> and <span class="math inline">\mathbf{x}_j</span> are two points in n-dimensional space.</li>
+<li>$d(_i, <span class="math inline">\mathbf{x}_j</span>)$ is the Euclidean distance between <span class="math inline">\mathbf{x}_i</span> and <span class="math inline">\mathbf{x}_j</span>.</li>
 </ul>
-<p>The goal of logistic regression is to find the values of <span class="math inline">\beta_0, \beta_1, \dots, \beta_n</span> that maximize the likelihood of the observed data. This is often done using a method known as maximum likelihood estimation (MLE).</p>
-<section id="matrix-notation" class="level3">
-<h3 class="anchored" data-anchor-id="matrix-notation">Matrix Notation</h3>
-<p>Given:</p>
-<ul>
-<li><p><span class="math inline">\boldsymbol{X}</span> is the design matrix of size <span class="math inline">m \times (n + 1)</span>.</p></li>
-<li><p><span class="math inline">\boldsymbol{y}</span> is a column vector of size <span class="math inline">m \times 1</span> containing the dependent variable values.</p></li>
-<li><p><span class="math inline">\boldsymbol{\beta}</span> is a column vector of size <span class="math inline">(n + 1) \times 1</span> containing the regression coefficients.</p></li>
-<li><p><span class="math inline">\boldsymbol{\epsilon}</span> is a column vector of size <span class="math inline">m \times 1</span> representing the errors.</p></li>
-</ul>
-<p>The relationship can be represented as:</p>
-<p><span class="math display">
-\large{y} = \frac{1}{1 + e^{-(\mathbf{X}\boldsymbol{\beta})}}
-</span></p>
-<p>The likelihood of the observed data given the model parameters can be written as:</p>
-<p><span class="math display">
-L(\boldsymbol{\beta}) = \prod_{i=1}^m p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
-</span></p>
-<p>where <span class="math inline">p(y_i | \mathbf{x}_i, \boldsymbol{\beta})</span> is the probability of observing <span class="math inline">y_i</span> given the independent variables <span class="math inline">\mathbf{x}_i</span> and the model parameters <span class="math inline">\boldsymbol{\beta}</span>. The goal of MLE is to find the values of <span class="math inline">\boldsymbol{\beta}</span> that maximize <span class="math inline">L(\boldsymbol{\beta})</span>.</p>
-</section>
-<section id="log-likelihood" class="level3">
-<h3 class="anchored" data-anchor-id="log-likelihood">Log Likelihood</h3>
-<p>Since the likelihood <span class="math inline">L(\boldsymbol{\beta})</span> is a product of many small numbers, it can be more convenient to work with the log likelihood, which is the natural logarithm of the likelihood:</p>
-<p><span class="math display">
-\log L(\boldsymbol{\beta}) = \sum_{i=1}^m \log p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
-</span></p>
-<p>The log likelihood can be maximized using various optimization algorithms, such as gradient ascent or Newton’s method.</p>
+<section id="weighted-k-nn" class="level3">
+<h3 class="anchored" data-anchor-id="weighted-k-nn">Weighted k-NN</h3>
+<p>A variation of k-NN is the weighted k-NN, where weights are assigned to the k neighbours based on their distance to the query point. Closer neighbors will have a larger influence on the prediction than farther ones. The weights are typically computed using the inverse of the distance:</p>
+<p><span class="math display">\begin{equation}
+w_i = \frac{1}{d(\mathbf{x}_0, \mathbf{x}_i)^2}
+\end{equation}</span></p>
 </section>
 </section>
 <section id="application-on-the-breast-cancer-wisconsin-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="application-on-the-breast-cancer-wisconsin-dataset">Application on the Breast Cancer Wisconsin Dataset</h2>
-<p>Now that we have an understanding of logistic regression, let’s apply these concepts to the Breast Cancer Wisconsin dataset. This dataset contains features computed from a digitized image of a fine needle aspirate (FNA) of a breast mass, and the goal is to classify the mass as benign or malignant. Stay tuned for a deep dive into the analysis and insights we can extract from this dataset!</p>
-<div class="cell" data-execution_count="34">
+<p>We will be using the same dataset we used before in the LogisticRegression. By comparing the results from both logistic regression and k-NN, we can evaluate the strengths and weaknesses of each approach and determine which is more suitable for this particular dataset.</p>
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import required libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -363,7 +345,7 @@ L(\boldsymbol{\beta}) = \prod_{i=1}^m p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, confusion_matrix</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
@@ -385,7 +367,7 @@ L(\boldsymbol{\beta}) = \prod_{i=1}^m p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
 <pre><code>required libraries loaded successfully!</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="36">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_breast_cancer()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.data</span>
@@ -394,233 +376,14 @@ L(\boldsymbol{\beta}) = \prod_{i=1}^m p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the data to a pandas DataFrame</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(X, columns<span class="op">=</span>feature_names)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'target'</span>] <span class="op">=</span> y</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="36">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">mean radius</th>
-<th data-quarto-table-cell-role="th">mean texture</th>
-<th data-quarto-table-cell-role="th">mean perimeter</th>
-<th data-quarto-table-cell-role="th">mean area</th>
-<th data-quarto-table-cell-role="th">mean smoothness</th>
-<th data-quarto-table-cell-role="th">mean compactness</th>
-<th data-quarto-table-cell-role="th">mean concavity</th>
-<th data-quarto-table-cell-role="th">mean concave points</th>
-<th data-quarto-table-cell-role="th">mean symmetry</th>
-<th data-quarto-table-cell-role="th">mean fractal dimension</th>
-<th data-quarto-table-cell-role="th">radius error</th>
-<th data-quarto-table-cell-role="th">texture error</th>
-<th data-quarto-table-cell-role="th">perimeter error</th>
-<th data-quarto-table-cell-role="th">area error</th>
-<th data-quarto-table-cell-role="th">smoothness error</th>
-<th data-quarto-table-cell-role="th">compactness error</th>
-<th data-quarto-table-cell-role="th">concavity error</th>
-<th data-quarto-table-cell-role="th">concave points error</th>
-<th data-quarto-table-cell-role="th">symmetry error</th>
-<th data-quarto-table-cell-role="th">fractal dimension error</th>
-<th data-quarto-table-cell-role="th">worst radius</th>
-<th data-quarto-table-cell-role="th">worst texture</th>
-<th data-quarto-table-cell-role="th">worst perimeter</th>
-<th data-quarto-table-cell-role="th">worst area</th>
-<th data-quarto-table-cell-role="th">worst smoothness</th>
-<th data-quarto-table-cell-role="th">worst compactness</th>
-<th data-quarto-table-cell-role="th">worst concavity</th>
-<th data-quarto-table-cell-role="th">worst concave points</th>
-<th data-quarto-table-cell-role="th">worst symmetry</th>
-<th data-quarto-table-cell-role="th">worst fractal dimension</th>
-<th data-quarto-table-cell-role="th">target</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>17.99</td>
-<td>10.38</td>
-<td>122.80</td>
-<td>1001.0</td>
-<td>0.11840</td>
-<td>0.27760</td>
-<td>0.3001</td>
-<td>0.14710</td>
-<td>0.2419</td>
-<td>0.07871</td>
-<td>1.0950</td>
-<td>0.9053</td>
-<td>8.589</td>
-<td>153.40</td>
-<td>0.006399</td>
-<td>0.04904</td>
-<td>0.05373</td>
-<td>0.01587</td>
-<td>0.03003</td>
-<td>0.006193</td>
-<td>25.38</td>
-<td>17.33</td>
-<td>184.60</td>
-<td>2019.0</td>
-<td>0.1622</td>
-<td>0.6656</td>
-<td>0.7119</td>
-<td>0.2654</td>
-<td>0.4601</td>
-<td>0.11890</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>20.57</td>
-<td>17.77</td>
-<td>132.90</td>
-<td>1326.0</td>
-<td>0.08474</td>
-<td>0.07864</td>
-<td>0.0869</td>
-<td>0.07017</td>
-<td>0.1812</td>
-<td>0.05667</td>
-<td>0.5435</td>
-<td>0.7339</td>
-<td>3.398</td>
-<td>74.08</td>
-<td>0.005225</td>
-<td>0.01308</td>
-<td>0.01860</td>
-<td>0.01340</td>
-<td>0.01389</td>
-<td>0.003532</td>
-<td>24.99</td>
-<td>23.41</td>
-<td>158.80</td>
-<td>1956.0</td>
-<td>0.1238</td>
-<td>0.1866</td>
-<td>0.2416</td>
-<td>0.1860</td>
-<td>0.2750</td>
-<td>0.08902</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>19.69</td>
-<td>21.25</td>
-<td>130.00</td>
-<td>1203.0</td>
-<td>0.10960</td>
-<td>0.15990</td>
-<td>0.1974</td>
-<td>0.12790</td>
-<td>0.2069</td>
-<td>0.05999</td>
-<td>0.7456</td>
-<td>0.7869</td>
-<td>4.585</td>
-<td>94.03</td>
-<td>0.006150</td>
-<td>0.04006</td>
-<td>0.03832</td>
-<td>0.02058</td>
-<td>0.02250</td>
-<td>0.004571</td>
-<td>23.57</td>
-<td>25.53</td>
-<td>152.50</td>
-<td>1709.0</td>
-<td>0.1444</td>
-<td>0.4245</td>
-<td>0.4504</td>
-<td>0.2430</td>
-<td>0.3613</td>
-<td>0.08758</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>11.42</td>
-<td>20.38</td>
-<td>77.58</td>
-<td>386.1</td>
-<td>0.14250</td>
-<td>0.28390</td>
-<td>0.2414</td>
-<td>0.10520</td>
-<td>0.2597</td>
-<td>0.09744</td>
-<td>0.4956</td>
-<td>1.1560</td>
-<td>3.445</td>
-<td>27.23</td>
-<td>0.009110</td>
-<td>0.07458</td>
-<td>0.05661</td>
-<td>0.01867</td>
-<td>0.05963</td>
-<td>0.009208</td>
-<td>14.91</td>
-<td>26.50</td>
-<td>98.87</td>
-<td>567.7</td>
-<td>0.2098</td>
-<td>0.8663</td>
-<td>0.6869</td>
-<td>0.2575</td>
-<td>0.6638</td>
-<td>0.17300</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>20.29</td>
-<td>14.34</td>
-<td>135.10</td>
-<td>1297.0</td>
-<td>0.10030</td>
-<td>0.13280</td>
-<td>0.1980</td>
-<td>0.10430</td>
-<td>0.1809</td>
-<td>0.05883</td>
-<td>0.7572</td>
-<td>0.7813</td>
-<td>5.438</td>
-<td>94.44</td>
-<td>0.011490</td>
-<td>0.02461</td>
-<td>0.05688</td>
-<td>0.01885</td>
-<td>0.01756</td>
-<td>0.005115</td>
-<td>22.54</td>
-<td>16.67</td>
-<td>152.20</td>
-<td>1575.0</td>
-<td>0.1374</td>
-<td>0.2050</td>
-<td>0.4000</td>
-<td>0.1625</td>
-<td>0.2364</td>
-<td>0.07678</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'target'</span>] <span class="op">=</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<div class="cell" data-execution_count="37">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset into training and testing sets</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the classifier</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> LogisticRegression(random_state<span class="op">=</span><span class="dv">42</span>, max_iter<span class="op">=</span><span class="dv">10000</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform 5-fold cross-validation</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> cross_val_score(clf, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>)</span>
@@ -641,12 +404,12 @@ L(\boldsymbol{\beta}) = \prod_{i=1}^m p(y_i | \mathbf{x}_i, \boldsymbol{\beta})
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy:"</span>, accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cross-validation scores: [0.95604396 0.95604396 0.96703297 0.96703297 0.92307692]
-Average cross-validation score: 0.9538461538461538
+<pre><code>Cross-validation scores: [0.93406593 0.9010989  0.95604396 0.9010989  0.92307692]
+Average cross-validation score: 0.9230769230769231
 Accuracy: 0.956140350877193</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="38">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the confusion matrix</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">'g'</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
@@ -655,14 +418,10 @@ Accuracy: 0.956140350877193</code></pre>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Confusion Matrix'</span>)</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LogisticRegression_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+<p><img src="KNN_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>The given confusion matrix represents the performance of a classification model on the breast cancer dataset from the sklearn library.</p>
-<p>From the matrix:</p>
-<p>The model correctly predicted 39 instances as class 0 (True Negative) and 70 instances as class 1 (True Positive). There were 4 instances where the model incorrectly predicted class 1 when the actual class was 0 (False Positive). Similarly, there was 1 instance where the model incorrectly predicted class 0 when the actual class was 1 (False Negative). In summary, the model has a high number of true predictions and a low number of false predictions, indicating a good classification performance for this dataset.</p>
-<p><strong>let’s reduce the x dimensionality to be able to visualize it on a simple plot</strong></p>
-<div class="cell" data-execution_count="43">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce the dimensionality of the dataset to 2 dimensions using PCA so we can visualize it</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.fit_transform(X)</span>
@@ -671,7 +430,7 @@ Accuracy: 0.956140350877193</code></pre>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X_pca, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the classifier</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> LogisticRegression(random_state<span class="op">=</span><span class="dv">42</span>, max_iter<span class="op">=</span><span class="dv">10000</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the classifier on the training data</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>clf.fit(X_train, y_train)</span>
@@ -702,7 +461,7 @@ Accuracy: 0.956140350877193</code></pre>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Prediction Region for Breast Cancer Dataset'</span>)</span>
 <span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LogisticRegression_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+<p><img src="KNN_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
@@ -945,11 +704,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../posts/3.Classification/KNN.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3.2 k-Nearest Neighbour (k-NN)</span>
+      <a href="../../posts/2.Regression/SupportVectorRegression.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2.2 Support Vector Regression</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../posts/3.Classification/LogisticRegression.html" class="pagination-link">
+        <span class="nav-page-text">3.1 Logistic Regression</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
