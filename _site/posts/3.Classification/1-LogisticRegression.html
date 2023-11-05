@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ahmed Aredah">
+<meta name="dcterms.date" content="2023-10-30">
 
-<title>Machine learning basics - 3.1 Logistic Regression</title>
+<title>Machine learning basics - 3.1-Logistic Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/3.Classification/KNN.html" rel="prev">
+<link href="../../posts/3.Classification/2-KNN.html" rel="next">
+<link href="../../posts/2.Regression/2-SupportVectorRegression.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -116,13 +119,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Machine learning basics - 3.1 Logistic Regression">
+<meta property="og:title" content="Machine learning basics - 3.1-Logistic Regression">
 <meta property="og:description" content="">
-<meta property="og:image" content="LogisticRegression_files/figure-html/cell-6-output-1.png">
+<meta property="og:image" content="1-LogisticRegression_files/figure-html/cell-6-output-1.png">
 <meta property="og:site-name" content="Machine learning basics">
-<meta name="twitter:title" content="Machine learning basics - 3.1 Logistic Regression">
+<meta name="twitter:title" content="Machine learning basics - 3.1-Logistic Regression">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="LogisticRegression_files/figure-html/cell-6-output-1.png">
+<meta name="twitter:image" content="1-LogisticRegression_files/figure-html/cell-6-output-1.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -173,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/3.Classification/KNN.html">3.Classification</a></li><li class="breadcrumb-item"><a href="../../posts/3.Classification/LogisticRegression.html">3.1 Logistic Regression</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/3.Classification/1-LogisticRegression.html">3.Classification</a></li><li class="breadcrumb-item"><a href="../../posts/3.Classification/1-LogisticRegression.html">3.1-Logistic Regression</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -186,14 +189,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">3.1 Logistic Regression</h1>
+      <h1 class="title">3.1-Logistic Regression</h1>
                       </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Ahmed Aredah </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 30, 2023</p>
+      </div>
+    </div>
     
       
     </div>
@@ -235,8 +250,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/1.Probabilities/Probability Theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1.1 Introduction to Probability Theory</span></a>
+  <a href="../../posts/1.Probabilities/0-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.0-Introduction and Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/1.Probabilities/1-Describe Data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.1-Describe Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/1.Probabilities/2-Probability Theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.2-Probability Theory</span></a>
   </div>
 </li>
       </ul>
@@ -252,14 +279,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/2.Regression/LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2.1 Multiple Linear Regression</span></a>
+  <a href="../../posts/2.Regression/1-LinearRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.1-Multiple Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/2.Regression/SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2.2 Support Vector Regression</span></a>
+  <a href="../../posts/2.Regression/2-SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.2-Support Vector Regression</span></a>
   </div>
 </li>
       </ul>
@@ -275,14 +302,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/3.Classification/KNN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3.2 k-Nearest Neighbour (k-NN)</span></a>
+  <a href="../../posts/3.Classification/1-LogisticRegression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">3.1-Logistic Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/3.Classification/LogisticRegression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">3.1 Logistic Regression</span></a>
+  <a href="../../posts/3.Classification/2-KNN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.2-k-Nearest Neighbour (k-NN)</span></a>
   </div>
 </li>
       </ul>
@@ -655,7 +682,7 @@ Accuracy: 0.956140350877193</code></pre>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Confusion Matrix'</span>)</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LogisticRegression_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+<p><img src="1-LogisticRegression_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>The given confusion matrix represents the performance of a classification model on the breast cancer dataset from the sklearn library.</p>
@@ -702,7 +729,7 @@ Accuracy: 0.956140350877193</code></pre>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Prediction Region for Breast Cancer Dataset'</span>)</span>
 <span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="LogisticRegression_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+<p><img src="1-LogisticRegression_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
@@ -945,11 +972,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../posts/3.Classification/KNN.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3.2 k-Nearest Neighbour (k-NN)</span>
+      <a href="../../posts/2.Regression/2-SupportVectorRegression.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2.2-Support Vector Regression</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../posts/3.Classification/2-KNN.html" class="pagination-link">
+        <span class="nav-page-text">3.2-k-Nearest Neighbour (k-NN)</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

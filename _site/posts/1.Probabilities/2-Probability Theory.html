@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ahmed Aredah">
+<meta name="dcterms.date" content="2023-10-25">
 
-<title>Machine learning basics - 1.1 Introduction to Probability Theory</title>
+<title>Machine learning basics - 1.2-Probability Theory</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/2.Regression/LinearRegression.html" rel="next">
-<link href="../../about.html" rel="prev">
+<link href="../../posts/2.Regression/1-LinearRegression.html" rel="next">
+<link href="../../posts/1.Probabilities/1-Describe Data.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -98,13 +100,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Machine learning basics - 1.1 Introduction to Probability Theory">
+<meta property="og:title" content="Machine learning basics - 1.2-Probability Theory">
 <meta property="og:description" content="">
-<meta property="og:image" content="Probability Theory_files/figure-html/cell-4-output-1.png">
+<meta property="og:image" content="2-Probability Theory_files/figure-html/cell-4-output-1.png">
 <meta property="og:site-name" content="Machine learning basics">
-<meta name="twitter:title" content="Machine learning basics - 1.1 Introduction to Probability Theory">
+<meta name="twitter:title" content="Machine learning basics - 1.2-Probability Theory">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="Probability Theory_files/figure-html/cell-4-output-1.png">
+<meta name="twitter:image" content="2-Probability Theory_files/figure-html/cell-4-output-1.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -155,7 +157,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/Probability Theory.html">1.Probabilities</a></li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/Probability Theory.html">1.1 Introduction to Probability Theory</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/0-Introduction.html">1.Probabilities</a></li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/2-Probability Theory.html">1.2-Probability Theory</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -168,14 +170,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">1.1 Introduction to Probability Theory</h1>
+      <h1 class="title">1.2-Probability Theory</h1>
                       </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Ahmed Aredah </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 25, 2023</p>
+      </div>
+    </div>
     
       
     </div>
@@ -217,8 +231,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/1.Probabilities/Probability Theory.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">1.1 Introduction to Probability Theory</span></a>
+  <a href="../../posts/1.Probabilities/0-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.0-Introduction and Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/1.Probabilities/1-Describe Data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.1-Describe Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/1.Probabilities/2-Probability Theory.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">1.2-Probability Theory</span></a>
   </div>
 </li>
       </ul>
@@ -234,14 +260,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/2.Regression/LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2.1 Multiple Linear Regression</span></a>
+  <a href="../../posts/2.Regression/1-LinearRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.1-Multiple Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/2.Regression/SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2.2 Support Vector Regression</span></a>
+  <a href="../../posts/2.Regression/2-SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.2-Support Vector Regression</span></a>
   </div>
 </li>
       </ul>
@@ -257,14 +283,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/3.Classification/KNN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3.2 k-Nearest Neighbour (k-NN)</span></a>
+  <a href="../../posts/3.Classification/1-LogisticRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.1-Logistic Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/3.Classification/LogisticRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3.1 Logistic Regression</span></a>
+  <a href="../../posts/3.Classification/2-KNN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.2-k-Nearest Neighbour (k-NN)</span></a>
   </div>
 </li>
       </ul>
@@ -281,8 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#probability-theory" id="toc-probability-theory" class="nav-link" data-scroll-target="#probability-theory">Probability Theory</a></li>
+  <li><a href="#probability-theory" id="toc-probability-theory" class="nav-link active" data-scroll-target="#probability-theory">Probability Theory</a></li>
   <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
   <li><a href="#application-in-machine-learning" id="toc-application-in-machine-learning" class="nav-link" data-scroll-target="#application-in-machine-learning">Application in Machine Learning</a></li>
   <li><a href="#code-examples" id="toc-code-examples" class="nav-link" data-scroll-target="#code-examples">Code Examples</a></li>
@@ -295,10 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Probability theory and random variables are fundamental concepts in machine learning, providing the mathematical framework for dealing with uncertainty and variability in data. In this blog post, we will explore these concepts and see how they are applied in the field of machine learning.</p>
-</section>
 <section id="probability-theory" class="level2">
 <h2 class="anchored" data-anchor-id="probability-theory">Probability Theory</h2>
 <p>Probability theory is a branch of mathematics that deals with the likelihood or chance of different outcomes. It is used in machine learning to model and make predictions about uncertain events. Some of the key concepts in probability theory include:</p>
@@ -360,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Expected Value: </span><span class="sc">{</span>expected_value<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Variance: </span><span class="sc">{</span>variance<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="Probability Theory_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+<p><img src="2-Probability Theory_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Expected Value: -0.0011666313731559523
@@ -633,13 +655,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../about.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">About</span>
+      <a href="../../posts/1.Probabilities/1-Describe Data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1.1-Describe Data</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../posts/2.Regression/LinearRegression.html" class="pagination-link">
-        <span class="nav-page-text">2.1 Multiple Linear Regression</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../posts/2.Regression/1-LinearRegression.html" class="pagination-link">
+        <span class="nav-page-text">2.1-Multiple Linear Regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

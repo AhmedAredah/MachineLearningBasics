@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ahmed Aredah">
+<meta name="dcterms.date" content="2023-11-04">
 
-<title>Machine learning basics - About</title>
+<title>Machine learning basics - 1.0-Introduction and Basics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./posts/1.Probabilities/0-Introduction.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../posts/1.Probabilities/1-Describe Data.html" rel="next">
+<link href="../../about.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -61,25 +65,23 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Machine learning basics - About">
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Machine learning basics - 1.0-Introduction and Basics">
 <meta property="og:description" content="">
-<meta property="og:image" content="Ahmed.jpg">
 <meta property="og:site-name" content="Machine learning basics">
-<meta name="twitter:title" content="Machine learning basics - About">
+<meta name="twitter:title" content="Machine learning basics - 1.0-Introduction and Basics">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="Ahmed.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Machine learning basics</span>
     </a>
   </div>
@@ -90,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" rel="" target="" aria-current="page">
+    <a class="nav-link active" href="../../about.html" rel="" target="" aria-current="page">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -119,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./about.html">About</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/0-Introduction.html">1.Probabilities</a></li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/0-Introduction.html">1.0-Introduction and Basics</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -129,7 +131,35 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">1.0-Introduction and Basics</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Ahmed Aredah </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 4, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -141,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
@@ -156,28 +186,28 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">1.Probabilities</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./posts/1.Probabilities/0-Introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/1.Probabilities/0-Introduction.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">1.0-Introduction and Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./posts/1.Probabilities/1-Describe Data.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/1.Probabilities/1-Describe Data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1.1-Describe Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./posts/1.Probabilities/2-Probability Theory.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/1.Probabilities/2-Probability Theory.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1.2-Probability Theory</span></a>
   </div>
 </li>
@@ -194,13 +224,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./posts/2.Regression/1-LinearRegression.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/2.Regression/1-LinearRegression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2.1-Multiple Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./posts/2.Regression/2-SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/2.Regression/2-SupportVectorRegression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2.2-Support Vector Regression</span></a>
   </div>
 </li>
@@ -217,13 +247,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./posts/3.Classification/1-LogisticRegression.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/3.Classification/1-LogisticRegression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3.1-Logistic Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./posts/3.Classification/2-KNN.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/3.Classification/2-KNN.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3.2-k-Nearest Neighbour (k-NN)</span></a>
   </div>
 </li>
@@ -236,41 +266,67 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#data-set-types" id="toc-data-set-types" class="nav-link active" data-scroll-target="#data-set-types">Data Set Types</a></li>
+  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">Data source</a></li>
+  <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">Data Types</a></li>
+  <li><a href="#measurement-scales" id="toc-measurement-scales" class="nav-link" data-scroll-target="#measurement-scales">Measurement Scales</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<div class="quarto-about-jolla">
-  <img src="Ahmed.jpg" class="about-image
-  round " style="height: 15em; width: 15em;">
- <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">About</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header><main class="content" id="quarto-document-content">
-<p>Hello! I am <strong>Ahmed Aredah</strong>, a PhD student specializing in Civil Engineering with a focus on transportation. Concurrently, I’m also pursuing an MSc in Computer Science. My academic journey has equipped me with a unique blend of knowledge, bridging the gap between the worlds of transportation and computer science.</p>
-<p>I take pride in being the developer behind <a href="https://github.com/VTTI-CSM/NeTrainSim">NeTrainSim</a>, an open-source network train simulator. NeTrainSim is a collaborative effort between Virginia Tech (VT), North Carolina State University (NC), and Deutsch Bahn (DB). The project was supervised and steered by the esteemed Prof.&nbsp;Hesham Rakha. This initiative is a testament to my passion for contributing to the community and my commitment to advancing the field of transportation through technological innovations and collaborative research.</p>
-<p>Within this blog, I will be showing the basics of machine learning techniques without going into too much of techniqal complexities. In addition, I will shed the lights on a quick overview of each technique with a little bit of some code.</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-</main> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="https://twitter.com/AhmedAredah" class="about-link" rel="" target="">
-    <i class="bi bi-twitter"></i>
-     <span class="about-link-text">Twitter</span>
-  </a>
-  <a href="https://linkedin.com/AhmedAredah" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-  <a href="https://github.com/AhmedAredah" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-</div>
-</div>
- <!-- /main -->
+
+
+<p>Machine learning is where the structured world of statistics meets the ever-growing and complex universe of data. In this digital age, machine learning takes statistical tools and uses them to teach computers to find patterns and make decisions based on data. This is a key part of data science, which aims to sift through large sets of information to find useful insights. While traditional statistics often focuses on testing theories and making predictions from samples, machine learning uses these ideas to create models that can predict future events based on past data. Data analytics is another piece of the puzzle, using these models to look closely at data and find valuable information that businesses can use to make better decisions.</p>
+<p>The world of statistics that feeds into machine learning is divided into two main approaches: Frequentist and Bayesian. Frequentist statistics predict future events by looking at past frequencies without making assumptions. This approach is popular in machine learning for its straightforward application to large datasets and its ability to provide clear answers without prior knowledge. Meanwhile, Bayesian statistics use past information as a starting point and update this as new data comes in, making it very useful for situations where data is limited or uncertain. Each approach has its place in machine learning: Frequentist methods are strong and work well on a large scale, while Bayesian methods are flexible and incorporate prior knowledge into their predictions. Together, these statistical methods power the engines of data science and analytics, helping us to understand and navigate the complex data landscapes of today’s world.</p>
+<p>Before we delve into the realm of machine learning, it’s essential to build a foundational understanding of the data we work with. Data, the raw material of machine learning, comes in various shapes and types, each with its own nuances and implications for how we’ll eventually teach machines to interpret and learn from it.</p>
+<section id="data-set-types" class="level2">
+<h2 class="anchored" data-anchor-id="data-set-types">Data Set Types</h2>
+<p>Any data set could be classified by either of the following:</p>
+<ol type="1">
+<li><p>Univariate data sets are the simplest form, containing just one variable. Think of it as looking at the world through a single lens, such as the height of individuals in a study.</p></li>
+<li><p>Bivariate data sets step up the complexity by involving two related variables. This is akin to viewing the world through binoculars, allowing us to see relationships, like the correlation between height and weight.</p></li>
+<li><p>Multivariate data sets are the most intricate, involving three or more variables. This is where we truly begin to capture the multifaceted nature of the world, such as how height, weight, and diet might all interplay in a health study.</p></li>
+</ol>
+</section>
+<section id="data-source" class="level2">
+<h2 class="anchored" data-anchor-id="data-source">Data source</h2>
+<p>The origin of our data is equally critical, as it can influence its clarity and reliability:</p>
+<ol type="1">
+<li><p>Observational data is akin to taking notes from the unaltered course of events. It’s uncontrolled and natural, but often messy with noise and outliers—like jotting down bird songs in a forest.</p></li>
+<li><p>Experimental data comes from more controlled environments where researchers actively manipulate conditions to see effects clearly. Imagine planting trees at varying elevations to measure growth differences. Here, a confounding variable, like soil type, could still influence results, even though it wasn’t directly controlled for.</p></li>
+</ol>
+</section>
+<section id="data-types" class="level2">
+<h2 class="anchored" data-anchor-id="data-types">Data Types</h2>
+<p>Additionally, the kind of data we collect determines our analytical approach:</p>
+<ol type="1">
+<li><p>Categorical data involves placing data into buckets or categories. It’s about organizing and counting, such as tallying voters by political party affiliation.</p></li>
+<li><p>Quantitative data refers to numerical measurements that are often continuous, like measuring rainfall in inches.</p></li>
+</ol>
+</section>
+<section id="measurement-scales" class="level2">
+<h2 class="anchored" data-anchor-id="measurement-scales">Measurement Scales</h2>
+<p>When we measure, we also consider the scale:</p>
+<ol type="1">
+<li><p>Nominal scales are for simple categorization, where the order doesn’t matter—like tagging animals with unique IDs.</p></li>
+<li><p>Ordinal scales introduce a ranking system, where the position holds meaning, such as classifying hotel reviews from one to five stars.</p></li>
+<li><p>Interval scales allow for quantifying the difference between items, but lack a true zero point, like dates in a calendar.</p></li>
+<li><p>Ratio scales give us the most detailed view, with both relative differences and a meaningful zero point, such as zero speed or zero income.</p></li>
+</ol>
+<p>Understanding these classifications provides a critical backdrop before stepping into the world of machine learning, where data is not just passively observed but actively used to train algorithms to make predictions and uncover insights.</p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -291,6 +347,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -499,10 +562,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../about.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">About</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./posts/1.Probabilities/0-Introduction.html" class="pagination-link">
-        <span class="nav-page-text">1.0-Introduction and Basics</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../posts/1.Probabilities/1-Describe Data.html" class="pagination-link">
+        <span class="nav-page-text">1.1-Describe Data</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

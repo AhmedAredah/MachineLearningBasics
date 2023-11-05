@@ -1,0 +1,53 @@
+---
+title: "1.0-Introduction and Basics"
+author: "Ahmed Aredah"
+date: "11.4.2023"
+output: html_document
+editor: visual
+---
+
+Machine learning is where the structured world of statistics meets the ever-growing and complex universe of data. In this digital age, machine learning takes statistical tools and uses them to teach computers to find patterns and make decisions based on data. This is a key part of data science, which aims to sift through large sets of information to find useful insights. While traditional statistics often focuses on testing theories and making predictions from samples, machine learning uses these ideas to create models that can predict future events based on past data. Data analytics is another piece of the puzzle, using these models to look closely at data and find valuable information that businesses can use to make better decisions.
+
+The world of statistics that feeds into machine learning is divided into two main approaches: Frequentist and Bayesian. Frequentist statistics predict future events by looking at past frequencies without making assumptions. This approach is popular in machine learning for its straightforward application to large datasets and its ability to provide clear answers without prior knowledge. Meanwhile, Bayesian statistics use past information as a starting point and update this as new data comes in, making it very useful for situations where data is limited or uncertain. Each approach has its place in machine learning: Frequentist methods are strong and work well on a large scale, while Bayesian methods are flexible and incorporate prior knowledge into their predictions. Together, these statistical methods power the engines of data science and analytics, helping us to understand and navigate the complex data landscapes of today's world.
+
+Before we delve into the realm of machine learning, it's essential to build a foundational understanding of the data we work with. Data, the raw material of machine learning, comes in various shapes and types, each with its own nuances and implications for how we'll eventually teach machines to interpret and learn from it.
+
+## Data Set Types
+
+Any data set could be classified by either of the following:
+
+1.  Univariate data sets are the simplest form, containing just one variable. Think of it as looking at the world through a single lens, such as the height of individuals in a study.
+
+2.  Bivariate data sets step up the complexity by involving two related variables. This is akin to viewing the world through binoculars, allowing us to see relationships, like the correlation between height and weight.
+
+3.  Multivariate data sets are the most intricate, involving three or more variables. This is where we truly begin to capture the multifaceted nature of the world, such as how height, weight, and diet might all interplay in a health study.
+
+## Data source
+
+The origin of our data is equally critical, as it can influence its clarity and reliability:
+
+1.  Observational data is akin to taking notes from the unaltered course of events. It's uncontrolled and natural, but often messy with noise and outliers---like jotting down bird songs in a forest.
+
+2.  Experimental data comes from more controlled environments where researchers actively manipulate conditions to see effects clearly. Imagine planting trees at varying elevations to measure growth differences. Here, a confounding variable, like soil type, could still influence results, even though it wasn't directly controlled for.
+
+## Data Types
+
+Additionally, the kind of data we collect determines our analytical approach:
+
+1.  Categorical data involves placing data into buckets or categories. It's about organizing and counting, such as tallying voters by political party affiliation.
+
+2.  Quantitative data refers to numerical measurements that are often continuous, like measuring rainfall in inches.
+
+## Measurement Scales
+
+When we measure, we also consider the scale:
+
+1.  Nominal scales are for simple categorization, where the order doesn't matter---like tagging animals with unique IDs.
+
+2.  Ordinal scales introduce a ranking system, where the position holds meaning, such as classifying hotel reviews from one to five stars.
+
+3.  Interval scales allow for quantifying the difference between items, but lack a true zero point, like dates in a calendar.
+
+4.  Ratio scales give us the most detailed view, with both relative differences and a meaningful zero point, such as zero speed or zero income.
+
+Understanding these classifications provides a critical backdrop before stepping into the world of machine learning, where data is not just passively observed but actively used to train algorithms to make predictions and uncover insights.

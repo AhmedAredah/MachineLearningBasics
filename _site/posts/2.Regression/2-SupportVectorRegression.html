@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ahmed Aredah">
+<meta name="dcterms.date" content="2023-10-26">
 
-<title>Machine learning basics - 2.2 Support Vector Regression</title>
+<title>Machine learning basics - 2.2-Support Vector Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/3.Classification/KNN.html" rel="next">
-<link href="../../posts/2.Regression/LinearRegression.html" rel="prev">
+<link href="../../posts/3.Classification/1-LogisticRegression.html" rel="next">
+<link href="../../posts/2.Regression/1-LinearRegression.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -114,13 +116,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Machine learning basics - 2.2 Support Vector Regression">
+<meta property="og:title" content="Machine learning basics - 2.2-Support Vector Regression">
 <meta property="og:description" content="">
-<meta property="og:image" content="SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png">
+<meta property="og:image" content="2-SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png">
 <meta property="og:site-name" content="Machine learning basics">
-<meta name="twitter:title" content="Machine learning basics - 2.2 Support Vector Regression">
+<meta name="twitter:title" content="Machine learning basics - 2.2-Support Vector Regression">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png">
+<meta name="twitter:image" content="2-SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -171,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/2.Regression/LinearRegression.html">2.Regression</a></li><li class="breadcrumb-item"><a href="../../posts/2.Regression/SupportVectorRegression.html">2.2 Support Vector Regression</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/2.Regression/1-LinearRegression.html">2.Regression</a></li><li class="breadcrumb-item"><a href="../../posts/2.Regression/2-SupportVectorRegression.html">2.2-Support Vector Regression</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -184,14 +186,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">2.2 Support Vector Regression</h1>
+      <h1 class="title">2.2-Support Vector Regression</h1>
                       </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Ahmed Aredah </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 26, 2023</p>
+      </div>
+    </div>
     
       
     </div>
@@ -233,8 +247,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/1.Probabilities/Probability Theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1.1 Introduction to Probability Theory</span></a>
+  <a href="../../posts/1.Probabilities/0-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.0-Introduction and Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/1.Probabilities/1-Describe Data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.1-Describe Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../posts/1.Probabilities/2-Probability Theory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.2-Probability Theory</span></a>
   </div>
 </li>
       </ul>
@@ -250,14 +276,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/2.Regression/LinearRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2.1 Multiple Linear Regression</span></a>
+  <a href="../../posts/2.Regression/1-LinearRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2.1-Multiple Linear Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/2.Regression/SupportVectorRegression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">2.2 Support Vector Regression</span></a>
+  <a href="../../posts/2.Regression/2-SupportVectorRegression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">2.2-Support Vector Regression</span></a>
   </div>
 </li>
       </ul>
@@ -273,14 +299,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/3.Classification/KNN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3.2 k-Nearest Neighbour (k-NN)</span></a>
+  <a href="../../posts/3.Classification/1-LogisticRegression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.1-Logistic Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/3.Classification/LogisticRegression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3.1 Logistic Regression</span></a>
+  <a href="../../posts/3.Classification/2-KNN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.2-k-Nearest Neighbour (k-NN)</span></a>
   </div>
 </li>
       </ul>
@@ -332,7 +358,7 @@ f(x) = \langle w, x \rangle + b
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png" class="img-fluid figure-img"></p>
+<p><img src="2-SupportVectorRegression_files/figure-html/47c27cc0-40f5-4c34-a487-8b5d9fa8fa49-1-bfa6cb5c-760e-436b-8df2-2f26451b386b.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">image.png</figcaption>
 </figure>
 </div>
@@ -482,7 +508,7 @@ Mean Squared Error: 479844290934.03</code></pre>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="SupportVectorRegression_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+<p><img src="2-SupportVectorRegression_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <div class="cell" data-execution_count="16">
@@ -499,7 +525,7 @@ Mean Squared Error: 479844290934.03</code></pre>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="SupportVectorRegression_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+<p><img src="2-SupportVectorRegression_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Looking at the “Errors of the SVR Model” plot, the following observations can be made:</p>
@@ -571,7 +597,7 @@ Mean Squared Error: 0.66</code></pre>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="SupportVectorRegression_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+<p><img src="2-SupportVectorRegression_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <div class="cell" data-execution_count="20">
@@ -587,7 +613,7 @@ Mean Squared Error: 0.66</code></pre>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Residuals'</span>)</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="SupportVectorRegression_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+<p><img src="2-SupportVectorRegression_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Observing the “Residuals vs.&nbsp;Predicted Values” plot, we can make the following comments:</p>
@@ -853,13 +879,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../posts/2.Regression/LinearRegression.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2.1 Multiple Linear Regression</span>
+      <a href="../../posts/2.Regression/1-LinearRegression.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2.1-Multiple Linear Regression</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../posts/3.Classification/KNN.html" class="pagination-link">
-        <span class="nav-page-text">3.2 k-Nearest Neighbour (k-NN)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../posts/3.Classification/1-LogisticRegression.html" class="pagination-link">
+        <span class="nav-page-text">3.1-Logistic Regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
