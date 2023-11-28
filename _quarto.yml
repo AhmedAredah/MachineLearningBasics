@@ -18,6 +18,8 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/AhmedAredah
+      - icon: house
+        href: https://github.com/AhmedAredah/MachineLearningBasics
       - icon: twitter
         href: https://twitter.com/AhmedAredah
 
