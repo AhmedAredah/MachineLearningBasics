@@ -4,6 +4,8 @@ author: "Ahmed Aredah"
 date: "11.4.2023"
 format: html
 editor: visual
+categories:
+    Basic Probability theories
 ---
 
 In the process of understanding and leveraging data for machine learning and analytical purposes, describing and summarizing the data is a pivotal step. Each type of measurement scale---nominal, ordinal, interval, and ratio---has specific statistical methods that can be used to provide a clear and concise summary of the data. These methods are crucial in extracting meaningful patterns and insights which can guide further analysis and model building.

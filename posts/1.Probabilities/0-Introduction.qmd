@@ -4,6 +4,8 @@ author: "Ahmed Aredah"
 date: "11.4.2023"
 output: html_document
 editor: visual
+categories:
+    Basic Probability theories
 ---
 
 Machine learning is where the structured world of statistics meets the ever-growing and complex universe of data. In this digital age, machine learning takes statistical tools and uses them to teach computers to find patterns and make decisions based on data. This is a key part of data science, which aims to sift through large sets of information to find useful insights. While traditional statistics often focuses on testing theories and making predictions from samples, machine learning uses these ideas to create models that can predict future events based on past data. Data analytics is another piece of the puzzle, using these models to look closely at data and find valuable information that businesses can use to make better decisions.
