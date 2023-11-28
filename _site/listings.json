@@ -2,6 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/5.AnomalyDetection/1-LocalOutlierFactor.html",
+      "/posts/4.Clustering/2-DBScan.html",
+      "/posts/4.Clustering/1-KMeans.html",
       "/posts/1.Probabilities/0-Introduction.html",
       "/posts/1.Probabilities/1-Describe Data.html",
       "/posts/3.Classification/1-LogisticRegression.html",

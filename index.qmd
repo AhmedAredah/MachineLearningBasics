@@ -1,5 +1,5 @@
 ---
-title: "Machine_learning_basics"
+title: "Machine Learning Basics"
 listing:
   contents: posts
   sort: "date desc"
