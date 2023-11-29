@@ -11,6 +11,7 @@ website:
   page-navigation: true
   repo-branch: main
   repo-url: https://github.com/AhmedAredah/MachineLearningBasics
+  repo-actions: [source]
 
   navbar:
     search: true
@@ -49,3 +50,4 @@ format:
     html-math-method: katex
     code-fold: false
     code-summary: "Show the code"
+    code-tools: true
