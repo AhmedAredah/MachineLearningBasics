@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/1.Probabilities/3-Probabilities.html",
       "/posts/5.AnomalyDetection/1-LocalOutlierFactor.html",
       "/posts/4.Clustering/2-DBScan.html",
       "/posts/4.Clustering/1-KMeans.html",

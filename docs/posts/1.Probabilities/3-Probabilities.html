@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ahmed Aredah">
-<meta name="dcterms.date" content="2023-10-25">
+<meta name="dcterms.date" content="2023-12-05">
 
-<title>Machine learning basics - 1.2-Probability Theory</title>
+<title>Machine learning basics - 1.3-Probability Distributions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/1.Probabilities/3-Probabilities.html" rel="next">
-<link href="../../posts/1.Probabilities/1-Describe Data.html" rel="prev">
+<link href="../../posts/2.Regression/1-LinearRegression.html" rel="next">
+<link href="../../posts/1.Probabilities/2-Probability Theory.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -97,16 +97,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="Machine learning basics - 1.2-Probability Theory">
+<meta property="og:title" content="Machine learning basics - 1.3-Probability Distributions">
 <meta property="og:description" content="">
-<meta property="og:image" content="2-Probability Theory_files/figure-html/cell-4-output-1.png">
+<meta property="og:image" content="../../data/bn1.png">
 <meta property="og:site-name" content="Machine learning basics">
-<meta name="twitter:title" content="Machine learning basics - 1.2-Probability Theory">
+<meta name="twitter:title" content="Machine learning basics - 1.3-Probability Distributions">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="2-Probability Theory_files/figure-html/cell-4-output-1.png">
+<meta name="twitter:image" content="../../data/bn1.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -162,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/0-Introduction.html">1.Probabilities</a></li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/2-Probability Theory.html">1.2-Probability Theory</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Posts</li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/0-Introduction.html">1.Probabilities</a></li><li class="breadcrumb-item"><a href="../../posts/1.Probabilities/3-Probabilities.html">1.3-Probability Distributions</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -175,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">1.2-Probability Theory</h1>
+      <h1 class="title">1.3-Probability Distributions</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Basic Probability theories</div>
               </div>
@@ -195,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 25, 2023</p>
+        <p class="date">December 5, 2023</p>
       </div>
     </div>
     
@@ -251,13 +254,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/1.Probabilities/2-Probability Theory.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../posts/1.Probabilities/2-Probability Theory.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1.2-Probability Theory</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/1.Probabilities/3-Probabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/1.Probabilities/3-Probabilities.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">1.3-Probability Distributions</span></a>
   </div>
 </li>
@@ -361,12 +364,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#probability-theory" id="toc-probability-theory" class="nav-link active" data-scroll-target="#probability-theory">Probability Theory</a></li>
-  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a></li>
-  <li><a href="#application-in-machine-learning" id="toc-application-in-machine-learning" class="nav-link" data-scroll-target="#application-in-machine-learning">Application in Machine Learning</a></li>
-  <li><a href="#code-examples" id="toc-code-examples" class="nav-link" data-scroll-target="#code-examples">Code Examples</a></li>
+  <li><a href="#exploring-probabilities" id="toc-exploring-probabilities" class="nav-link active" data-scroll-target="#exploring-probabilities">Exploring Probabilities</a></li>
+  <li><a href="#probability-distribution" id="toc-probability-distribution" class="nav-link" data-scroll-target="#probability-distribution">Probability Distribution</a></li>
+  <li><a href="#conditional-probabilities" id="toc-conditional-probabilities" class="nav-link" data-scroll-target="#conditional-probabilities">Conditional Probabilities</a></li>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions">Probability Distributions</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/AhmedAredah/MachineLearningBasics/blob/main/posts/1.Probabilities/2-Probability Theory.ipynb" class="toc-action">View source</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/AhmedAredah/MachineLearningBasics/blob/main/posts/1.Probabilities/3-Probabilities.ipynb" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -374,101 +377,215 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>Probability theory and random variables are fundamental concepts in machine learning, providing the mathematical framework for dealing with uncertainty and variability in data. In this blog post, we will explore these concepts and see how they are applied in the field of machine learning.</p>
-<section id="probability-theory" class="level2">
-<h2 class="anchored" data-anchor-id="probability-theory">Probability Theory</h2>
-<p>Probability theory is a branch of mathematics that deals with the likelihood or chance of different outcomes. It is used in machine learning to model and make predictions about uncertain events. Some of the key concepts in probability theory include:</p>
-<ul>
-<li><p><strong>Probability Distribution:</strong> A probability distribution describes how the values of a random variable are distributed. It can be discrete or continuous, depending on the type of variable.</p></li>
-<li><p><strong>Expected Value:</strong> The expected value is the mean or average value of a random variable, calculated by taking the weighted average of all possible values.</p></li>
-<li><p><strong>Variance and Standard Deviation:</strong> These measures describe the spread or dispersion of a random variable’s values.</p></li>
-</ul>
+<strong>Bayesian Networks</strong>: Bayesian networks are graphical models that represent the probabilistic relationships among a set of variables. They are used for a variety of tasks, including classification, regression, and prediction. (below is a good example of a bayesian network)
+<p align="center">
+<img src="../../data/bn1.png" width="40%" height="40%">
+</p>
+<p><strong>Probabilistic Classifiers</strong>: Probabilistic classifiers, like Naive Bayes classifiers, use probability theory to predict the likelihood of different outcomes. They are particularly useful for classification tasks where we need to estimate the probability of each class.</p>
+<section id="exploring-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-probabilities">Exploring Probabilities</h2>
+<p>To demonstrate these concepts, we will use a dataset from scikit-learn, a popular machine learning library in Python. We will calculate various probabilities and conditional probabilities to gain insights into our data. We will use the Iris dataset, a classic dataset in machine learning. This dataset includes measurements of sepal length, sepal width, petal length, and petal width of 150 iris flowers from three different species.</p>
 </section>
-<section id="random-variables" class="level2">
-<h2 class="anchored" data-anchor-id="random-variables">Random Variables</h2>
-<p>A random variable is a variable that takes on different values based on the outcome of a random process. In machine learning, random variables are used to represent the features and target variable in a dataset. They can be classified into two types:</p>
-<ul>
-<li><p><strong>Discrete Random Variables:</strong> These variables take on a finite number of values. For example, the outcome of a coin toss can be represented as a discrete random variable with two possible values: heads or tails.</p></li>
-<li><p><strong>Continuous Random Variables:</strong> These variables can take on an infinite number of values within a given range. For example, the height of a person can be represented as a continuous random variable.</p></li>
-</ul>
+<section id="probability-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="probability-distribution">Probability Distribution</h2>
+<p>First, we will plot the probability distributions of each feature in the Iris dataset. This will help us understand the spread and central tendencies of these features.</p>
 </section>
-<section id="application-in-machine-learning" class="level2">
-<h2 class="anchored" data-anchor-id="application-in-machine-learning">Application in Machine Learning</h2>
-<p>In machine learning, probability theory and random variables are used to model and understand the uncertainty in data. Here are some ways they are applied:</p>
-<ul>
-<li><strong>Random Forests:</strong> Random forests are a type of ensemble learning method that uses a collection of decision trees to make predictions. The “random” in random forests refers to the random selection of features and data points used to build each tree.</li>
-</ul>
-</section>
-<section id="code-examples" class="level2">
-<h2 class="anchored" data-anchor-id="code-examples">Code Examples</h2>
-<p>In the following Python examples, we will illustrate the key concepts of probability theory and random variables discussed above. Here’s what we will be doing:</p>
-<ol type="1">
-<li><p><strong>Probability Distribution:</strong> We’ll create a normal distribution, which is a type of probability distribution, and visualize it using a graph. This will demonstrate how data can be distributed around a mean value.</p>
-<ul>
-<li><strong>Expected Value and Variance:</strong> From the normal distribution, we’ll calculate the expected value (mean) and variance, which give us a sense of the central tendency and spread of the data.</li>
-</ul></li>
-<li><p><strong>Discrete Random Variable:</strong> We’ll simulate a coin toss, which is an example of a discrete random variable, to show how we can represent events with two or more distinct outcomes.</p></li>
-<li><p><strong>Continuous Random Variable:</strong> Finally, we’ll simulate the heights of people, which is an example of a continuous random variable, to demonstrate how we can represent events with an infinite range of possible outcomes.</p></li>
-</ol>
-<p>Through these examples, we’ll gain a practical understanding of these concepts and see how they can be applied to real-world data.</p>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import necessary libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="conditional-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-probabilities">Conditional Probabilities</h2>
+<p>Conditional probability is the probability of an event occurring given that another event has already occurred. We will calculate the conditional probabilities for different combinations of features and iris species. For example, we might calculate the probability of an iris having a sepal length greater than 5 cm, given that it is of a particular species.</p>
+<p>We will create visualizations to help understand these probabilities. Histograms and scatter plots can be particularly useful for this. These visualizations will provide insights into how different features are distributed and how they relate to the iris species.</p>
+<p>In the following sections, we will implement these analyses using Python and scikit-learn, and discuss our findings. Stay tuned for a deep dive into the world of probabilities in machine learning!</p>
+<p>Next, let’s move on to implementing these concepts using Python and the Iris dataset from scikit-learn.</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability Distribution: Example with a Normal Distribution</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mu, sigma <span class="op">=</span> <span class="dv">0</span>, <span class="fl">0.1</span>  <span class="co"># mean and standard deviation</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.random.normal(mu, sigma, <span class="dv">1000</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the histogram of the sample</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>count, bins, ignored <span class="op">=</span> plt.hist(s, <span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.plot(bins, <span class="dv">1</span> <span class="op">/</span> (sigma <span class="op">*</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)) <span class="op">*</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         np.exp(<span class="op">-</span>(bins <span class="op">-</span> mu) <span class="op">**</span> <span class="dv">2</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma <span class="op">**</span> <span class="dv">2</span>)),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>         linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'r'</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Probability Distribution: Normal Distribution'</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected Value and Variance</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>expected_value <span class="op">=</span> np.mean(s)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>variance <span class="op">=</span> np.var(s)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Expected Value: </span><span class="sc">{</span>expected_value<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Variance: </span><span class="sc">{</span>variance<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Iris dataset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> datasets.load_iris()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>iris_df <span class="op">=</span> pd.DataFrame(data<span class="op">=</span> np.c_[iris[<span class="st">'data'</span>], iris[<span class="st">'target'</span>]],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                     columns<span class="op">=</span> iris[<span class="st">'feature_names'</span>] <span class="op">+</span> [<span class="st">'target'</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert target to actual species names for clarity</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>species_map <span class="op">=</span> {i: species <span class="cf">for</span> i, species <span class="kw">in</span> <span class="bu">enumerate</span>(iris.target_names)}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>iris_df[<span class="st">'species'</span>] <span class="op">=</span> iris_df[<span class="st">'target'</span>].<span class="bu">map</span>(species_map)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>iris_df.drop(<span class="st">'target'</span>, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display first few rows of the dataframe</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>iris_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">sepal length (cm)</th>
+<th data-quarto-table-cell-role="th">sepal width (cm)</th>
+<th data-quarto-table-cell-role="th">petal length (cm)</th>
+<th data-quarto-table-cell-role="th">petal width (cm)</th>
+<th data-quarto-table-cell-role="th">species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>5.1</td>
+<td>3.5</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>4.9</td>
+<td>3.0</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4.7</td>
+<td>3.2</td>
+<td>1.3</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4.6</td>
+<td>3.1</td>
+<td>1.5</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>iris_df[<span class="st">"species"</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>array(['setosa', 'versicolor', 'virginica'], dtype=object)</code></pre>
+</div>
+</div>
+<p>We have successfully loaded the Iris dataset and prepared it for analysis. The dataset contains measurements of sepal length, sepal width, petal length, and petal width for 150 iris flowers, classified into three species: setosa, versicolor, and virginica.</p>
+<p>Now, let’s proceed to the first part of our analysis:</p>
+</section>
+<section id="probability-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="probability-distributions">Probability Distributions</h2>
+<p>We will plot the probability distributions of each feature (sepal length, sepal width, petal length, petal width) for the entire dataset. These plots will help us understand the distribution of each feature across all the iris flowers in our dataset.</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjusting the layout to a 2x2 grid for the subplots</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">10</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sepal Length</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> species <span class="kw">in</span> iris.target_names:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> iris_df[iris_df[<span class="st">'species'</span>] <span class="op">==</span> species]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(subset[<span class="st">'sepal length (cm)'</span>], ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], label<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>species<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Sepal Length Distribution'</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'Sepal Length (cm)'</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].legend()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Sepal Width</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> species <span class="kw">in</span> iris.target_names:</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> iris_df[iris_df[<span class="st">'species'</span>] <span class="op">==</span> species]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(subset[<span class="st">'sepal width (cm)'</span>], ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">1</span>], label<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>species<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_title(<span class="st">'Sepal Width Distribution'</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'Sepal Width (cm)'</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">1</span>].legend()</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Petal Length</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> species <span class="kw">in</span> iris.target_names:</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> iris_df[iris_df[<span class="st">'species'</span>] <span class="op">==</span> species]</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(subset[<span class="st">'petal length (cm)'</span>], ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">0</span>], label<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>species<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_title(<span class="st">'Petal Length Distribution'</span>)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_xlabel(<span class="st">'Petal Length (cm)'</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].set_ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">0</span>].legend()</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Petal Width</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> species <span class="kw">in</span> iris.target_names:</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> iris_df[iris_df[<span class="st">'species'</span>] <span class="op">==</span> species]</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(subset[<span class="st">'petal width (cm)'</span>], ax<span class="op">=</span>axes[<span class="dv">1</span>, <span class="dv">1</span>], label<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>species<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">'Petal Width Distribution'</span>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_xlabel(<span class="st">'Petal Width (cm)'</span>)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].legend()</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="2-Probability Theory_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Expected Value: -0.0011666313731559523
-Variance: 0.009747766798048644</code></pre>
+<p><img src="3-Probabilities_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>In this Python code, we generated random numbers to demonstrate what we learned earlier. First, we showed what a normal distribution looks like by drawing a bell-shaped curve, and then we calculated the average (mean) and spread (variance) of the numbers.</p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Discrete Random Variable: Example with a Coin Toss</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>coin_toss <span class="op">=</span> np.random.choice([<span class="st">'Heads'</span>, <span class="st">'Tails'</span>], <span class="dv">1000</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>unique, counts <span class="op">=</span> np.unique(coin_toss, return_counts<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>coin_toss_prob <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(unique, counts <span class="op">/</span> <span class="bu">len</span>(coin_toss)))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Coin Toss Probabilities: </span><span class="sc">{</span>coin_toss_prob<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Coin Toss Probabilities: {'Heads': 0.479, 'Tails': 0.521}</code></pre>
+<p>The probability distributions of the features in the Iris dataset are depicted in the plots above. These distributions provide insight into how the values of sepal length, sepal width, petal length, and petal width are spread across the dataset. Each plot includes a kernel density estimate (KDE), which gives a smooth estimate of the probability density function of the variable.</p>
+<p>Next, we will delve into calculating conditional probabilities for different combinations of features and iris species. This will help us understand how the characteristics of iris flowers vary depending on their species.</p>
+<p>Conditional probability is expressed as P(A|B), representing the probability of event A occurring given that B is true. In our case, we will calculate probabilities like P(Sepal Length &gt; x | Species = y), which is the probability that the sepal length is greater than a certain value x given that the iris flower belongs to species y.</p>
+<p>Let’s start with an example: calculating the probability of sepal length being greater than 5 cm for each species.</p>
+<p>The calculated conditional probabilities for the sepal length being greater than 5 cm, given each species of iris, are as follows:</p>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the threshold for sepal length</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating conditional probabilities</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>conditional_probs <span class="op">=</span> {}</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> species <span class="kw">in</span> iris_df[<span class="st">'species'</span>].unique():</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Subset of data for the species</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> iris_df[iris_df[<span class="st">'species'</span>] <span class="op">==</span> species]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the probability: P(Sepal Length &gt; 5 | Species)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> (subset[<span class="st">'sepal length (cm)'</span>] <span class="op">&gt;</span> threshold).mean()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    conditional_probs[species] <span class="op">=</span> prob</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>conditional_probs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<pre><code>{'setosa': 0.44, 'versicolor': 0.94, 'virginica': 0.98}</code></pre>
 </div>
 </div>
-<p>Here, we simulated flipping a coin a thousand times and showed the likelihood of getting heads or tails. Which turns out to be ~0.5 for both cases.</p>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continuous Random Variable: Example with Heights of People</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>heights <span class="op">=</span> np.random.normal(<span class="dv">170</span>, <span class="dv">10</span>, <span class="dv">1000</span>)  <span class="co"># mean height = 170 cm, std deviation = 10 cm</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mean_height <span class="op">=</span> np.mean(heights)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>var_height <span class="op">=</span> np.var(heights)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Mean Height: </span><span class="sc">{</span>mean_height<span class="sc">}</span><span class="ss"> cm'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Variance of Heights: </span><span class="sc">{</span>var_height<span class="sc">}</span><span class="ss"> cm^2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Mean Height: 169.9326452743008 cm
-Variance of Heights: 104.72824250963349 cm^2</code></pre>
+<ul>
+<li><p>Setosa: There is a 44% probability that a Setosa iris has a sepal length greater than 5 cm.</p></li>
+<li><p>Versicolor: There is a 94% probability that a Versicolor iris has a sepal length greater than 5 cm.</p></li>
+<li><p>Virginica: There is a 98% probability that a Virginica iris has a sepal length greater than 5 cm.</p></li>
+</ul>
+<p>These probabilities demonstrate the variation in sepal length across different species. While the majority of Versicolor and Virginica species have sepal lengths greater than 5 cm, the Setosa species tends to have shorter sepals on average.</p>
+<p>This kind of analysis is crucial in understanding the distribution of features within each species and can be particularly useful in classification tasks in machine learning, where distinguishing between different classes based on feature probabilities is essential.</p>
+<p>To illustrate the conditional probabilities we calculated, we can create a bar plot. This plot will show the probability of the sepal length being greater than 5 cm for each species of iris. A bar plot is an effective way to visually compare these probabilities across different species. Let’s create this plot.</p>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting the conditional probabilities to a DataFrame for plotting</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>prob_df <span class="op">=</span> pd.DataFrame(<span class="bu">list</span>(conditional_probs.items()), columns<span class="op">=</span>[<span class="st">'Species'</span>, <span class="st">'Probability'</span>])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the bar plot</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'Species'</span>, y<span class="op">=</span><span class="st">'Probability'</span>, data<span class="op">=</span>prob_df, palette<span class="op">=</span><span class="st">"viridis"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Probability of Sepal Length &gt; 5 cm by Species'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Probability'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Iris Species'</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>, <span class="dv">1</span>)  <span class="co"># Setting the y-axis limits to show probabilities clearly</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="3-Probabilities_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Here, we simulated the heights of a thousand people, calculated the average height, and how much the heights vary from each other. This is just like how we use these concepts in machine learning to understand and predict different events or outcomes based on data.</p>
-<p>In conclusion, machine learning is like teaching a computer to make educated guesses. It looks at patterns and learns how likely different outcomes are, much like how we use probability theory to predict future events. By using random variables, which are values that can change randomly, machine learning models can consider a range of possibilities and make predictions that can be generalized to new, unseen data. This combination of probability theory and random variables is what allows machine learning models to effectively learn from data and make accurate predictions.</p>
+<p>The bar plot above illustrates the conditional probabilities of each iris species having a sepal length greater than 5 cm.</p>
+<p>In conclusion, our exploration of probability theory and conditional probabilities using the Iris dataset from scikit-learn has demonstrated the importance of these concepts in machine learning. We’ve seen how understanding probability distributions and conditional probabilities can provide deep insights into data, aiding in more informed decision-making and better model development. Whether it’s distinguishing between different iris species based on sepal length or applying these principles to more complex datasets, the fundamentals of probability theory remain a critical tool in the data scientist’s toolkit. This journey underscores the value of a strong foundation in probability theory for anyone venturing into the field of machine learning.</p>
 
 
 </section>
@@ -760,13 +877,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../posts/1.Probabilities/1-Describe Data.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1.1-Describe Data</span>
+      <a href="../../posts/1.Probabilities/2-Probability Theory.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1.2-Probability Theory</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../posts/1.Probabilities/3-Probabilities.html" class="pagination-link">
-        <span class="nav-page-text">1.3-Probability Distributions</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../posts/2.Regression/1-LinearRegression.html" class="pagination-link">
+        <span class="nav-page-text">2.1-Multiple Linear Regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
